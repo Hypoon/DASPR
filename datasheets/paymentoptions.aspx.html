@@ -1,0 +1,1877 @@
+<!DOCTYPE html PUBLIC "-//W3C//DTD HTML 4.0 Transitional//EN">
+<html><head>
+<meta http-equiv="content-type" content="text/html; charset=UTF-8">
+    <title>Payment Options</title>
+    <meta content="Microsoft Visual Studio 7.0" name="GENERATOR">
+    <meta content="C#" name="CODE_LANGUAGE">
+    <meta content="JavaScript" name="vs_defaultClientScript">
+    <meta content="http://schemas.microsoft.com/intellisense/ie5" name="vs_targetSchema">
+    <link type="text/css" href="paymentoptions.aspx_files/Billpaycss_new.css" rel="Stylesheet">
+
+    <script type="text/javascript" src="paymentoptions.aspx_files/Billpayjs_new.js"></script><script type="text/javascript" src="paymentoptions.aspx_files/a.js"></script>
+
+    <script type="text/javascript">
+    //SIT: https://collaborateextst.verizon.com/aims/encore/VZCTC.serv
+    //STG: https://collaborateextstg.verizon.com/aims/encore/VZCTC.serv
+    //PRD: https://collaborateext.verizon.com/aims/encore/VZCTC.serv
+    var mylocation = document.location.toString();
+    setCookie("BPSPANISH", "N");
+    if (mylocation.toString().indexOf('espanol.verizon.com') > 0) {
+        setCookie("BPSPANISH", "Y");
+    }
+    function loadExpriedPromotion() {
+
+        var script = document.createElement('script');
+        script.type = 'text/javascript';
+        script.src = '/foryourhome/myaccount/Main/MyVerizon/MyVzExpriedPromo.aspx?Load=xml&div=divLoad&btn=0118537455111&Reload=true&getstarted=6C10PE&header=true&Client=MYBILLPAY';
+        document.getElementsByTagName('head')[0].appendChild(script);
+    }
+    function setCookie(name, value) {
+        document.cookie = name + "=" + escape(value);
+    }
+
+    function getValFrom(offset) {
+        var VZBP = document.cookie.substring(document.cookie.toString().search("VZBP="), document.cookie.length);
+        var endstr = VZBP.indexOf("&", offset);
+        if (endstr == -1) { endstr = VZBP.length; }
+        return VZBP.substring(offset, endstr);
+    }
+    function Open1XCCBillMatrixWindow() {
+        try {
+            var matrixBTN = document.getElementById('hdnCSRBTN').value;
+            var matrixAccID = document.getElementById('hdnCSRAccountID').value;
+            var matrixServiceState = document.getElementById('hdnCSRServiceState').value;
+            var matrixSpanishInd = "N";
+            var matrixURL = 'https://paymentsVerizonConsumer.billmatrix.com/ValidationPage.aspx';
+            var spanishURL = 'espanol.verizon.com';
+            var sPageURL = document.location.toString().toLowerCase();
+
+            if (sPageURL.indexOf(spanishURL) > 0) {
+                matrixSpanishInd = "Y";
+            }
+            var sForm = '<html><head></head><body><form id="frmPostData" name="frmPostData" method="post"><input name="pmtbtn" type="hidden" id="pmtbtn" value="' + matrixBTN + '" /><input name="pmtaccid" type="hidden" id="pmtaccid" value="' + matrixAccID + '" /><input name="isspanishsite" type="hidden" id="isspanishsite" value="' + matrixSpanishInd + '" /><input name="pmtservicestate" type="hidden" id="pmtservicestate" value="' + matrixServiceState + '" />' +
+				            '</form></body></html>';
+
+
+
+            var e = window.open("", "BillMatrixWindow", "height=580,width=780,toolbar=no,menubar=no,Scrollbars=yes");
+            e.document.write(sForm);
+            var eForm = e.document.frmPostData;
+            eForm.action = matrixURL;
+            eForm.submit();
+
+            frameBillMatrixLogging.document.write(sForm);
+            var BMPostForm = frameBillMatrixLogging.document.frmPostData;
+            BMPostForm.action = "OneTimePaymentPPB.aspx?BMPOST=YES";
+            BMPostForm.submit();
+        }
+        catch (e) {
+        }
+    }
+    function GetCookieParam(name) {
+        var VZBP = document.cookie.substring(document.cookie.toString().search("VZBP="), document.cookie.length);
+        var arg = name + "=";
+        var alen = arg.length;
+        var clen = document.cookie.length;
+        var i = 0;
+        while (i < clen) {
+            var j = i + alen;
+            if (VZBP.substring(i, j) == arg) {
+                return getValFrom(j);
+            }
+            i = i + 1;
+            if (i == clen) { break; }
+        }
+        return null;
+    }
+
+    var aims_ctcChatWindow = null;
+
+    function doOnChatLinkClick() {
+        var strDomain = '.verizon.com';
+        var uid = 'UAkuhAeBcHxjMHxfswNfVQ%3d%3d';
+        var sessionid = "";
+        var bCan = 'nz55oZDRNJLEy95C54dPJA%3d%3d';
+        var BTN = '26tZEW05jswkATifV5arbw%3d%3d';
+        if (strDomain == ".verizon.com") {
+            sessionid = GetCookieParam('SessionID');
+
+        }
+        var stAimsChatURl = 'https://collaborateext.verizon.com/aims/encore/VZCTC.serv';
+        var appid = 145;
+        var myWidth = 320;
+        var myHeight = 620;
+        var padding = 12;
+        var aimsLob = "Res";
+        var aimsState = 'VQgIWEz1ukY%3d';
+        var aimsName = 'BONINI,JOHN';
+        top.resizeTo(top.screen.availWidth - (myWidth + padding), top.screen.availHeight);
+        top.moveTo(myWidth + padding, 0);
+        if (aims_ctcChatWindow != null && aims_ctcChatWindow.closed == false) {
+            aims_ctcChatWindow.focus();
+        }
+        else {
+            var chatWindowName = 'AIMSCTCCHATWINDOW';
+            var width = screen.availWidth;
+            var width = 320;
+            var height = 700;
+            var aimsChatWindowFeatures = 'left=0,top=0,width=' + width + ',height=' + height;
+            var srcTitle = document.title
+            srcTitle = srcTitle.replace("'", "");
+            var aimsurl = "";
+            if (strDomain == ".verizon.com") {
+                aimsurl = stAimsChatURl + "?appid=" + appid + "&Source Title=" +
+escape(srcTitle) + "&Source URL=" + escape(window.document.location) + "&lob=" + aimsLob + "&state=" + aimsState + "&billingcan=" + bCan + "&btn=" + BTN + "&UserId=" + uid + "&BPSessionid=" + sessionid + "&name=" + aimsName;
+            }
+            else {
+                aimsurl = stAimsChatURl + "?appid=" + appid + "&Source Title=" +
+escape(srcTitle) + "&Source URL=" + escape(window.document.location) + "&lob=" + aimsLob + "&state=" + aimsState + "&name=" + aimsName;
+            }
+            aims_ctcChatWindow = window.open(aimsurl, chatWindowName,
+aimsChatWindowFeatures);
+        }
+    }
+    
+ try
+            {
+            if(window.navigator.appName == "Microsoft Internet Explorer")
+                document.getElementById("dvAccSelector").style.left = "710px";
+            else 
+                document.getElementById("dvAccSelector").style.left = "500px";
+            }
+             catch(ex){}
+function DisplayVirtualAgent()
+{
+try
+{
+var sLocation = document.location.toString().toLowerCase();
+var sPageName = PageName();
+switch(sPageName)
+{
+case "rxcc_enrollment":
+case "rxdc_enrollment":
+case "rxdd_realtime_enrollment":
+case "paymentreminderedit":
+case "rxselectpage":
+case "refunds":
+case "paymenthistory":
+case "pacreate":
+case "paymentoptions":
+case "managepaymentprofiles":
+var strDomain = '.verizon.com';
+    if (strDomain == ".verizon.com") {
+document.getElementById("divVAgent").style.display="";
+}
+else{
+document.getElementById("divVAgent").style.display="none";
+}
+break;
+default:
+document.getElementById("divVAgent").style.display="none";
+break;
+}
+}
+catch(e)
+{
+}
+}
+function PageName()
+{
+try
+{
+var sPageName = "paymentoptions";
+sPageName  = sPageName.toLowerCase();
+return sPageName;
+}
+catch(e)
+{
+}
+}
+
+function showHideEzActPopUp(iStatus)
+{
+try{
+    if(iStatus == 1)
+    {
+        var objLight = document.getElementById("fade");
+        objLight.style.height = document.body.scrollHeight + 'px';
+        objLight.style.width = document.body.scrollWidth + 'px';
+        var objPopUp = document.getElementById('blkEzAct');
+        objPopUp.style.display = 'block';
+        objLight.style.display = 'block';
+        objPopUp.style.left = (document.body.scrollWidth /2 - 325 ) + 'px';
+        objPopUp.style.top = '200px';
+        objPopUp.style.visibility = "visible";
+    }
+    else
+    {
+        var objLight = document.getElementById("fade");
+        objLight.style.height = document.body.scrollHeight + '0px';
+        objLight.style.width = document.body.scrollWidth + '0px';
+        var objPopUp = document.getElementById('blkEzAct');
+        objPopUp.style.display = 'none';
+        objLight.style.display = 'none';       
+        objPopUp.style.visibility = "hidden";
+    }
+    }
+    catch(ex)
+    {
+    }
+    
+     
+}
+function showHideDenrollPopUp(iStatus)
+{
+try{
+    if(iStatus == 1)
+    {
+        var objLight = document.getElementById("fade");
+        objLight.style.height = document.body.scrollHeight + 'px';
+        objLight.style.width = document.body.scrollWidth + 'px';
+        var objPopUp = document.getElementById('blkDenrollment');
+        objPopUp.style.display = 'block';
+        objLight.style.display = 'block';
+        objPopUp.style.left = (document.body.scrollWidth /2 - 250 ) + 'px';
+        objPopUp.style.top = '200px';
+        objPopUp.style.visibility = "visible";
+        
+    }
+    else
+    {
+        var objLight = document.getElementById("fade");
+        objLight.style.height = document.body.scrollHeight + '0px';
+        objLight.style.width = document.body.scrollWidth + '0px';
+        var objPopUp = document.getElementById('blkDenrollment');
+        objPopUp.style.display = 'none';
+        objLight.style.display = 'none';       
+        objPopUp.style.visibility = "hidden";
+    }
+    }
+    catch(ex)
+    {
+    }
+    
+     
+}
+function setDeEnrollValues(QPESTATUS, ProfileType, CardType, CardNumber, ProfileID) {
+    try {
+            if(QPESTATUS == "QPE")
+            {
+              document.getElementById('hdQPESTATUS').value ="QPE";
+                document.getElementById('hdProfileType').value = ProfileType;
+                document.getElementById('hdCardType').value = CardType;
+                document.getElementById('hdCardNumber').value = CardNumber
+                document.getElementById('hdProfileID').value = ProfileID;
+            }
+            else
+            {
+                document.getElementById('hdQPESTATUS').value = QPESTATUS;
+                document.getElementById('hdProfileType').value = ProfileType;
+                document.getElementById('hdCardType').value = CardType;
+                document.getElementById('hdCardNumber').value = CardNumber
+                document.getElementById('hdProfileID').value = ProfileID;
+            }
+    }
+    catch (ex) {
+    }
+}
+function DeEnroll()
+{
+    try
+    {
+        if(document.getElementById('hdQPESTATUS').value == 'CC')
+        {
+            if(document.getElementById("chkDeenrollEPPFB").checked)
+            {
+                getWebresp("easypaydeenrollconfirm.aspx?ProfileType="+document.getElementById('hdProfileType').value +"&CardType="+document.getElementById('hdCardType').value+"&CardNumber="+document.getElementById('hdCardNumber').value+"&ProfileID="+document.getElementById('hdProfileID').value,'true','');
+            }
+            else
+            {
+                getWebresp("easypaydeenrollconfirm.aspx?Denroll=onlyap&ProfileType="+document.getElementById('hdProfileType').value +"&CardType="+document.getElementById('hdCardType').value+"&CardNumber="+document.getElementById('hdCardNumber').value+"&ProfileID="+document.getElementById('hdProfileID').value,'true','');
+            }
+        }
+        else        
+        {
+            if(document.getElementById("chkDeenrollEPPFB").checked)
+            {
+                getWebresp("easypaydeenrollconfirm.aspx?ProfileType="+document.getElementById('hdProfileType').value+"&AccountNumber="+document.getElementById('hdCardNumber').value+"&AccountType="+document.getElementById('hdCardType').value+"&ProfileID="+document.getElementById('hdProfileID').value,'true','');
+            }
+            else
+            {
+                getWebresp("easypaydeenrollconfirm.aspx?Denroll=onlyap&ProfileType="+document.getElementById('hdProfileType').value+"&AccountNumber="+document.getElementById('hdCardNumber').value+"&AccountType="+document.getElementById('hdCardType').value+"&ProfileID="+document.getElementById('hdProfileID').value,'true','');
+            }
+            
+        }
+    }
+    catch(ex)
+    {
+    }
+        
+}
+var sTarget = 'pmtoptions';
+try
+{
+var sCurrentLoc = window.location.href;
+sTarget = sCurrentLoc.substring( sCurrentLoc.indexOf('?target=')+8);
+}
+catch(ex){}
+function redirectOnBTNChange()
+{
+    window.location='PaymentOptions.aspx?target='+ sTarget +'&ChangeBTN='+document.getElementById('cboMultiPhones').value;
+    
+}
+
+function getWebRespFromPO(sURL,sPTarget)
+{
+    if(sURL == "OneTimePaymentPPB.aspx" || sURL == "EasyPayOptions.aspx")
+    {
+        document.getElementById("dvBannerRight").style.display = "none";
+    }
+    if(sURL == "PAProcessingPPB.aspx" || sURL == "PaymentHistoryPPB.aspx" || sURL == "EasyPayConfirmation.aspx")
+    {
+        document.getElementById("dvBannerRight").style.display = "block";
+    }
+    sTarget = sPTarget;
+    if(window.location.toString().toLowerCase().indexOf('paymentoptions.aspx') >= 0)
+    {getWebresp(sURL,true);} 
+    else 
+    {window.location='paymentoptions.aspx?target=' + sPTarget;}
+    
+}
+
+function doOneTimePrintFriendly()
+{
+    if(document.forms["frmOneTimeConfirmation"]  != null)
+    { 
+        var Url = 'OneTimeConfirmationPFPPB.aspx';
+        var Request = null;    
+        if (window.XMLHttpRequest) {
+            Request = new XMLHttpRequest();
+        }
+        else {
+            if (window.ActiveXObject) {
+                try {
+                    Request = new ActiveXObject('Msxml2.XMLHTTP');
+                }
+                catch (err) {
+                    try {
+                        Request = new ActiveXObject('Microsoft.XMLHTTP');
+                    }
+                    catch (err2) { }
+                }
+            }
+        }
+        if (Request) {
+            var e = window.open("", "PrinterFriendly", "width=750,height=600");
+            Request.open('POST', Url, true);
+            Request.setRequestHeader('Content-type', 'application/x-www-form-urlencoded');
+            Request.onreadystatechange = function() { getHTMLResponse(Request, Url,e); };
+            Request.send('');
+            
+        }  
+    }
+}
+
+function getHTMLResponse(pRequest, Url,e)
+{
+    var ReadyStateComplete = 4;
+    var Ready = pRequest.readyState;
+    if (Ready == ReadyStateComplete) 
+    {
+        var HttpStatus;
+        try 
+        {
+            if (pRequest.status != undefined) {
+                HttpStatus = pRequest.status;
+            }
+            else 
+            {
+                HttpStatus = 13030;
+            }
+        }
+        catch (e) {
+            // 13030 is the custom code to indicate the condition -- in Mozilla/FF --
+            // when the o object's status and statusText properties are
+            // unavailable, and a query attempt throws an exception.
+            HttpStatus = 13030;
+        };
+        if (pRequest.getResponseHeader('Location') != null &&
+                pRequest.getResponseHeader('Location').indexOf('signin.verizon.com/sso/logout') > 0) 
+        {
+            document.location = pRequest.getResponseHeader('Location');
+            return;
+        }
+        else
+            if (HttpStatus == 200 || HttpStatus == 0) {
+            var x = document.getElementById("lblPrinterFriendlyBlock").innerHTML;
+            x = x.replace('id=lblPFHeader>','style="Display:none;">');
+            var sForm = '';
+            
+            sForm = pRequest.responseText;
+            sForm = sForm.replace("<!--INSERTHERE-->", x);            
+            e.document.write(sForm);
+            e.window.print();          
+        }
+    }
+
+}
+
+function showHideOTPnEPSecs(secToHide, headTitle)
+{
+try{
+    document.getElementById("divPmtSec").style.top = "0px";
+    if( secToHide== "FOTP" || secToHide== "FEPS"|| secToHide== "FHIDE" || document.getElementById("wfade").style.display == "none")
+    {
+        if(secToHide == "OTP" || secToHide == "FOTP")
+        {
+            document.getElementById("dvOnetimepayment").style.display = "none";
+            document.getElementById("dvOverview").style.display = "";
+            document.getElementById("liOTP").className = "";
+            document.getElementById("liEPS").className = "active";        
+            document.getElementById("ulTPnEPSContainer").style.display = "";
+            document.getElementById("dvAccFixed").style.display = "";
+            document.getElementById("dvEPTabbedHeader").className  = "ep";
+            document.getElementById("dvEPTabbedHeader").style.display = "";
+            //document.getElementById("divPmtSec").style.top  = "-15px";
+        }
+        else if(secToHide == "EPS" || secToHide == "FEPS")
+        {
+            document.getElementById("dvOnetimepayment").style.display = "";
+            document.getElementById("dvOverview").style.display = "none";
+            document.getElementById("liOTP").className = "active";
+            document.getElementById("liEPS").className = "";
+            document.getElementById("ulTPnEPSContainer").style.display = "";
+            document.getElementById("dvAccFixed").style.display = "";
+            document.getElementById("dvEPTabbedHeader").className  = "ep";
+            document.getElementById("dvEPTabbedHeader").style.display = "";
+            if(headTitle != null && headTitle.length > 0)
+                document.getElementById("hOTPHeading").innerHTML = headTitle;
+            else 
+                document.getElementById("hOTPHeading").innerHTML = "Make a One-Time Payment";
+            //document.getElementById("divPmtSec").style.top  = "-15px";
+        }
+        else 
+        {
+            document.getElementById("ulTPnEPSContainer").style.display = "none";
+            document.getElementById("dvOnetimepayment").style.display = "none";
+            document.getElementById("dvOverview").style.display = "none";
+            document.getElementById("dvAccFixed").style.display = "none";
+            document.getElementById("dvEPTabbedHeader").className  = "";
+            document.getElementById("dvEPTabbedHeader").style.display = "none";
+            //document.getElementById("divPmtSec").style.top  = "-30px";
+            //dvEPTabbedHeader dvAccSelector divPmtSec
+            if(window.navigator.appName == "Microsoft Internet Explorer")
+                document.getElementById("divPmtSec").style.top = "0px";
+            else if(window.navigator.appName == "Netscape")
+                document.getElementById("divPmtSec").style.top = "10px";
+            
+        }
+    }
+}catch(ex1){}
+}
+
+
+function continuePayment() {
+if (document.getElementById("hdnIsInstantAcc").value == "Y") {
+return false;
+}
+else {
+if (document.getElementById("hdnEastLECFinal").value == "Y") {
+addFinalAmounts();
+}
+getWebresp('onetimepaymentppb.aspx', true, formParams('frmOneTime', 'submit', ''));
+return true;
+}
+}
+    
+    </script>
+
+    <script language="javascript" type="text/javascript">
+    dtSessionTime = new Date();
+    </script>
+
+    <script language="JavaScript" type="text/javascript" src="paymentoptions.aspx_files/js.txt">
+    OAS_url = 'http://oascentral.verizononline.com/RealMedia/ads/';
+    OAS_sitepage = 'my.verizon.com/account';
+    OAS_listpos = 'Right';
+    </script><script language="JavaScript1.1" src="paymentoptions.aspx_files/151948540Top.js"></script>
+
+<script src="paymentoptions.aspx_files/0vzup-UUEUUUU_at-primary_fs-N_fsw-N_up-Y_spl-NNNN_pp-undecide.js" type="text/javascript"></script><script src="paymentoptions.aspx_files/scbname31.js" type="text/javascript"></script><script src="paymentoptions.aspx_files/getwb31.js" type="text/javascript"></script><script src="paymentoptions.aspx_files/MyVzExpriedPromo.js" type="text/javascript"></script></head>
+<body style="background-image: url(&quot;https://www22.verizon.com/images/headerfooter/scb31bodyback.jpg&quot;); background-repeat: repeat-x;" bottommargin="0" leftmargin="0" topmargin="0" rightmargin="0" ms_positioning="GridLayout" onload="loadExpriedPromotion()">
+    <!-- PaymentoptionsOriginal -->
+    <a name="POTop"></a>
+    <input name="VZHeader1:HdnPageUrl" id="VZHeader1_HdnPageUrl" value="/vz/residential/myverizon2/billpay" type="hidden">
+    <input name="VZHeader1:HdnPageName" id="VZHeader1_HdnPageName" value="paymentoptions" type="hidden">
+    <input name="VZHeader1:HdnPageTitle" id="VZHeader1_HdnPageTitle" value="paymentoptions" type="hidden">
+    <input name="VZHeader1:HdnAcct" id="VZHeader1_HdnAcct" value="DM56050762VV" type="hidden">
+    <input name="VZHeader1:HdnTestAcct" id="VZHeader1_HdnTestAcct" value="DM550923JDSV" type="hidden">
+    <input name="VZHeader1:HdnFormVal" id="VZHeader1_HdnFormVal" value="1" type="hidden">
+    <span id="dvHeaderHTML"><!-- Vignette V6 Thu Sep 01 04:19:14 2011 -->
+
+<!-- ************ Begin : Single Code Base Header ************ -->
+<style type="text/css">
+#scboverlay{z-index:110000;position:absolute;top:0;left:0;width:100%;height:100%;background:#000;cursor:pointer;opacity:0.75;filter:alpha(opacity=75);}
+#scboverlaycontent{z-index:110001;position:absolute;top:0;left:0;width:100%;}
+#scbmsgcont{position:absolute;top:150px;left:0;width:100%;overflow:visible;text-align:center;}
+#scbmsg{position:relative;width:300px;margin-left:auto;margin-right:auto;font-size:12px;text-align:left;}
+.scbmsgtop,
+.scbmsgbody{background-image:url(https://www22.verizon.com/images/headerfooter/scbpopupback.gif) !important;background-repeat:no-repeat !important;}
+.scbmsgtop{background-color:#e3e3e3 !important;}
+.scbmsgbody{background-color:white !important;}
+.scbimg{background-image:url(https://www22.verizon.com/images/headerfooter/scb31images.gif);background-repeat:no-repeat;}
+.scbclose{width:15px;height:15px;background-position:-251px -198px;}
+.scbyes{width:41px;height:21px;background-position:-350px -177px;}
+.scbno{width:34px;height:21px;background-position:-392px -177px;}
+a.scbbtnred,
+a.scbbtnblack,
+a.scbbtnred span,
+a.scbbtnblack span,
+a.scbbtnred span span,
+a.scbbtnblack span span{display:block;background:transparent url(https://www22.verizon.com/images/scbbuttons.gif) no-repeat;}
+a.scbbtnred,
+a.scbbtnblack{display:block;float:left;overflow:hidden;margin-left:10px;padding-right:10px;text-decoration:none !important;}
+a.scbbtnred span span,
+a.scbbtnblack span span{margin-left:10px;color:#fff;font:bold 12px Arial,Helvetica,sans-serif;background-repeat:repeat;line-height:21px !important;text-align:center;white-space:nowrap;}
+a.scbbtnred{background-position:right -44px;}
+a.scbbtnblack{background-position:right -176px;}
+a.scbbtnred span{background-position:0 0;}
+a.scbbtnblack span{background-position:0 -132px;}
+a.scbbtnred span span{background-color:#f00;background-position:0 -22px;}
+a.scbbtnblack span span{background-color:#000;background-position:0 -154px;}
+a.scbbtnred:active,
+a.scbbtnblack:active{outline:none;}
+a.scbbtnred:active{background-position:right -110px}
+a.scbbtnred:active span{background-position:left -66px;}
+a.scbbtnred:active span span{background-position:left -88px;}
+a.scbbtnblack:active{background-position:right -242px;}
+a.scbbtnblack:active span{background-position:left -198px;}
+a.scbbtnblack:active span span{background-position:left -220px;}
+</style>
+
+
+<div style="display:none;"><img src="paymentoptions.aspx_files/biglogo.gif" alt="Verizon" height="111" width="200">A
+ leader in fiber optics, Verizon offers phone, Internet, TV, wireless 
+and service bundles to residential, business, government and wholesale 
+clients.</div>
+
+<script type="text/javascript" src="paymentoptions.aspx_files/a.html"></script>
+<script type="text/javascript">try{document.execCommand('BackgroundImageCache',false,true);}catch(err){}var scbUseLocalPTCopy="";var bLog=false,bLog20=false,bType=false,bLOB=false,bSess=false,bSessAM=false,gcookie="";
+var bVOLRM=fnGetFullCookie('VOLRememberMe');if(bVOLRM==null){bVOLRM='';}
+
+var aType=new Array('retailconsumer','retailgeneralbiz','eservices');
+var aLOB=new Array('myvz','myvzquickpay','concos','rescos','smbcos','retailgenbiz','retailconsumer','callassistant');
+var ckType=fnGetFullCookie('vzUserType');if(ckType==null){ckType='';}if(ckType!=null){ckType=ckType.toLowerCase();}else{ckType='';}for(i=0;i<aType.length;i++){if(ckType==aType[i]){bType=true;break;}}
+var ckLOB=fnGetFullCookie('LOB_CATEGORY');if(ckLOB==null){ckLOB='';}if(ckLOB!=null){ckLOB=ckLOB.toLowerCase();}else{ckLOB='';}for(i=0;i<aLOB.length;i++){if(ckLOB==aLOB[i]){bLOB=true;break;}}
+var ckSM=fnGetFullCookie('SMSESSION');if(ckSM==null){ckSM='';}if(ckSM!=null&&ckSM.length>100){bSess=true;}var ckAM=fnGetFullCookie('dotcomsid');if(ckAM==null){ckAM='';}
+if(ckAM!=null&&ckAM.length>0){bSessAM=true;}if((bLOB&&bSess)||(bSessAM)){bLog=true;}
+var gcookie=fnGetFullCookie('vzUserType');if(gcookie==null){gcookie='';}
+if(document.cookie.length==0){document.write('<scr'+'ipt type="text/javascript" src="https://www22.verizon.com/includes/validlogin/"><\/scr'+'ipt>');}
+bLog20=true;
+</script>
+<noscript><div align="center"><a href="http://www22.verizon.com/about/privacy/browser/">Please enable JavaScript while viewing this site.</a></div></noscript>
+
+
+<!--googleoff: all-->
+<noindex>
+
+<script type="text/javascript">if(bVOLRM!=null&&bVOLRM.length>0&&!bLog&&((window.location.href).toLowerCase()).indexOf('https://signin.verizon.com/sso/forgot')==-1){var retURL=(window.location.href).replace(/\:443/,'');if(retURL!=''&&retURL.toUpperCase().indexOf('ERGCON.ASPX')==-1){retURL='?Target='+retURL;retURL=escape(escape(retURL));}window.location.href='https://signin.verizon.com/sso/RememberMeServlet?target=https%3A%2F%2Fsignin%2Everizon%2Ecom%2Fsso%2FProcessLoginServlet%3FloginType%3Dconsumer%26target%3Dhttps%3A%2F%2Fwww22%2Everizon%2Ecom%2Fforyourhome%2Fregistration%2Fregprofile%2Fergcon.aspx'+retURL+'&clientId=central';}</script>
+
+<script type="text/javascript">var scbUpgrade=(!is_ff&&!is_ie&&!is_safari_mac&&!is_chrome)||(is_ff&&is_major<3)||(is_ie&&!is_ie6up)||(is_chrome&&is_major<7)||(is_safari_mac&&is_major<5);
+if(scbUpgrade){document.write('<div style="display:block;text-align:left;border:#0198cd 2px solid;padding:10px 35px;font-size:11px;color:#000;font-weight:normal;background:#fbfbfb url(https://www22.verizon.com/images/headerfooter/scbhoriztile.gif) repeat-x 0 -205px;"><img src="https://www22.verizon.com/images/spacer.gif" width="1" height="1" alt="" style="position:absolute;top:10px;left:12px;width:17px;height:17px;background:url(https://www22.verizon.com/images/headerfooter/scbpartner.gif) no-repeat 0 -259px;">You are using an unsupported browser that verizon.com does not support.  For a better experience, please use a <a href="http://www22.verizon.com/about/privacy/browser/" style="font-size:11px;">supported browser</a>.</div>');}
+</script>
+
+<script type="text/javascript">if(bSessAM){bLog20=true;}</script>
+
+
+	<div id="SCB20h" style="display:block;">
+		<script type="text/javascript">
+			if(bLog20){
+				dispLayer('SCB20h','block');
+				if(document.body!=null){
+					document.body.style.backgroundImage='url(https://www22.verizon.com/images/headerfooter/scb31bodyback.jpg)';
+					document.body.style.backgroundRepeat='repeat-x';
+				}
+			}
+		</script>
+	<!-- Vignette V6 Thu Sep 01 04:19:14 2011 -->
+
+
+<style type="text/css">
+
+body{font-family:Arial,Helvetica,sans-serif;background:#fff;margin:0;padding:0;position:relative;width:100%;}
+.textgrey{color:#555;}
+.texttitle{font-size:28px;color:#f00;font-family:Arial,Helvetica,sans-serif;}
+.textsubtitle{font-size:16px;color:#000;width:320px;}
+.text12{font-size:12px;}
+#ghfbodycont{width:100%;min-width:995px;text-align:center;}
+#ghfbodycont{z-index:1;}
+#ghfbodycontent{margin-left:auto;margin-right:auto;text-align:left;}
+#ghfbody{text-align:left;margin-left:auto;margin-right:auto;background:#fff;}
+#ghfbody{background:#fff;text-align:center;}
+#ghfredbar{min-width:995px;background:#eb0000 url(https://www22.verizon.com/images/headerfooter/scbhoriztile.gif) repeat-x 0 -195px;height:5px;margin:17px 0;}
+
+#ghfbody{background:transparent;}
+.bordergrad .bl{background-color:#fff;}
+#scbheadercont{position:relative;z-index:995;width:100%;min-width:995px;text-align:center;background:transparent;}
+#scbheader{position:relative;width:995px;height:27px;text-align:left;margin-left:auto;margin-right:auto;background:transparent url(https://www22.verizon.com/images/headerfooter/scb31tabbar.gif) no-repeat;}
+#scbrednav{}
+.handpointer{cursor:hand;cursor:pointer;}
+
+#scbmyvzpp{position:absolute;top:10px;left:0;width:135px;height:75px;}
+.scbimglogo{position:absolute;top:0;left:10px;width:44px;height:24px;background-position:0 0;}
+.scbimgmyvz{position:relative;width:118px;height:30px;background-position:-251px -219px;margin-bottom:3px;}
+#scbppicon{position:relative;}
+.scbppimg{height:37px;width:100px;border-width:0;background:transparent url(https://www22.verizon.com/images/headerfooter/scbpartner.gif) no-repeat;}
+.scbaol{background-position:0 -37px;}
+.scbyahoo{background-position:0 -111px;}
+.scbmsn{background-position:-20px -148px;}
+
+#scbnav{position:absolute;top:0;left:80px;margin:0 208px 0 224px;z-index:1005;}
+#scbnav iframe{visibility:visible;position:absolute;top:0;left:-1px;width:153px;height:250px;z-index:-1;filter:progid:DXImageTransform.Microsoft.Alpha(style=0,opacity=0);}
+#scbnav,
+#scbnav ul,
+ul#scbnav li{padding:0;margin:0;list-style:none;line-height:1;z-index:900;}
+#scbnav a{display:block;position:relative;}
+#scbnav li{float:left;}
+* html #scbnav li{width:1px;}
+#scbnav li ul,
+#scbnav li ul ul{position:absolute;width:180px;margin-left:-999em;border:#c9c9c9 solid 1px;border-width:0 2px 1px 1px;}
+#scbnav li ul ul{border-top-width:1px;}
+#scbnav li ul li{position:relative;width:180px;background:#fff;border-bottom:#c9c9c9 solid 1px;}
+#scbnav li ul ul{position:absolute;top:-1px;margin:0 0 0 180px;}
+#scbnav .menulink{/*border-left:#fff solid 1px;*/}
+#scbnav .menulinkdiv{background:url(https://www22.verizon.com/images/headerfooter/scbhoriztile.gif) no-repeat left -440px;}
+
+#scbnav a.menulink{height:27px;line-height:27px;margin:0;padding:0 14px;color:#fff;/*border-right:#efefef;*/font-weight:bold;white-space:nowrap;}
+#scbnav a.menulink:hover,
+#scbnav a.menulink:active{color:#c5251f;background:#fff;padding-right:15px;margin-right:-1px;}
+#scbnav a.notext{font-size:13px;font-weight:bold;color:#fff;line-height:37px;height:37px;margin:0;padding:0 0 0 5px;text-decoration:none;text-align:center;}
+#scbnav li a{font-size:12px;font-weight:normal;color:#666;margin:0;padding:4px 14px;line-height:15px;background-image:none;text-decoration:none;}
+#scbnav li ul li ul li a{font-size:11px;font-weight:normal;color:#666;}
+#scbnav li ul li ul li{background:#fff url(https://www22.verizon.com/images/headerfooter/scb31images.gif) repeat-y left -177px;}
+#scbnav li ul li ul li ul li{background:#666;}
+#scbnav li:hover ul ul,
+#scbnav li.sfhover ul ul,
+#scbnav li:hover ul ul ul,
+#scbnav li.sfhover ul ul ul{margin-left:-999em;}
+#scbnav li li:hover,
+#scbnav li li.sfhover{background:#eee;}
+#scbnav li li:hover a,
+#scbnav li li.sfhover a{color:#666;}
+#scbnav li li:hover li a,
+#scbnav li li.sfhover li a{color:#666;}
+#scbnav li:hover ul,
+#scbnav li.sfhover ul{margin-left:0;}
+#scbnav li li:hover ul,
+#scbnav li li.sfhover ul,
+#scbnav li li li:hover ul,
+#scbnav li li li.sfhover ul{margin-left:180px;}
+#scbnav a.subarrow{background:url(https://www22.verizon.com/images/headerfooter/scb31images.gif) -265px 8px no-repeat;}
+#scbnav li li:hover a.subarrow,
+#scbnav li li.sfhover a.subarrow,
+#scbnav a.subarrow:hover,
+#scbnav a.subarrow .sfhover{background:url(https://www22.verizon.com/images/headerfooter/scb31images.gif) -433px 8px no-repeat;}
+#scbnav .subbot{overflow:hidden;width:180px;height:8px;margin-top:-1px;border-bottom-width:0;}
+#scbnav li.subbot:hover{background:#fff}
+
+#id203{border-left-width:0;}
+#id203.sfhover,
+#id1.sfhover,
+#id12.sfhover,
+#id42.sfhover,
+#id53.sfhover,
+#id91.sfhover,
+#id125.sfhover{background:#fff;}
+#id203.sfhover a.menulink,
+#id1.sfhover a.menulink,
+#id12.sfhover a.menulink,
+#id42.sfhover a.menulink,
+#id53.sfhover a.menulink,
+#id91.sfhover a.menulink,
+#id125.sfhover a.menulink{background:#fff;color:#c5251f !important;font-weight:bold !important;padding-right:15px;margin-right:-1px;/*border-left:#c9c9c9 solid 1px;*/}
+#id203.sfhover a.menulink,
+#id203 a.menulink{/*border-left-width:0;*/}
+#scbnav li span.scbmyvzdivider{line-height:27px;color:#fff;float:left;margin-left:-1px;}
+
+/* user area */
+#scbuser{position:absolute;top:0;right:10px;color:#fff;z-index:800;width:320px;height:27px;}
+#scbuser a,
+#scbuser img,
+#scbuser span{float:left;line-height:27px;color:#fff;font-size:11px;font-weight:normal;padding:0 0 0 5px;}
+#scbuser a:link,
+#scbuser a:visited,
+#scbuser a:active{text-decoration:none;}
+#scbuser a:hover{text-decoration:underline;}
+#scbuser a.scbusernamelink:link,
+#scbuser a.scbusernamelink:visited,
+#scbuser a.scbusernamelink:hover,
+#scbuser a.scbusernamelink:active{font-weight:bold;}
+#scbuserdivoff,
+#scbuserdivon{display:none;float:left;}
+#scblinkscont{float:right;}
+#scbuser .scbuseron,
+#scbuser .scbuseroff{width:17px;height:27px;}
+#scbuser .scbuseroff{background-position:-193px -196px;}
+#scbuser .scbuseron{background-position:-216px -196px;}
+
+#scbnoticecont{display:none;text-align:left;border:#0198cd 2px solid;padding:10px 35px;font-weight:normal;font-size:11px;color:#000;background:#fbfbfb url(https://www22.verizon.com/images/headerfooter/scbhoriztile.gif) repeat-x 0 -205px;}
+#scbinfo{width:17px;height:17px;background:url(https://www22.verizon.com/images/headerfooter/scbpartner.gif) no-repeat 0 -259px;}
+.scbnotice{font-size:11px;color:#000;font-weight:normal;}
+
+#scbTBcont{display:none;width:100%;min-width:680px;height:24px;text-align:center;z-index:980;position:relative;left:0;}
+.scbTBtext{position:relative;width:680px;height:24px;text-align:left;margin-left:auto;margin-right:auto;font-weight:bold;font-size:12px;color:#000;background:transparent url(https://www22.verizon.com/images/headerfooter/scb31tabbar.gif) no-repeat 0 -30px;}
+.scbinfoimg{width:17px;height:17px;background:url(https://www22.verizon.com/images/headerfooter/scbpartner.gif) no-repeat 0 -259px;}
+#scbTBstart{position:absolute;top:3px;right:117px;width:82px;height:16px;background:url(https://www22.verizon.com/images/headerfooter/scb31images.gif) no-repeat -427px -177px;}
+#scbTBno{position:absolute;top:3px;right:20px;width:82px;height:16px;background:url(https://www22.verizon.com/images/headerfooter/scb31images.gif) no-repeat -427px -194px;}
+
+#scbgreybarcont{position:relative;z-index:980;width:100%;min-width:995px;height:106px;text-align:center;margin-bottom:15px;}
+#scbgreybarcont a{font-family:Arial,Helvetica,sans-serif;text-decoration:none;font-weight:normal;}
+#scbgreybarcont a:hover,
+#scbgreybarcont a:active{text-decoration:underline;}
+.scbimgtabarrowdn,
+.scbimgtabarrowup{position:absolute;left:18px;top:11px;z-index:-1;width:9px;height:11px;}
+.scbimgtabarrowdn{background-position:-82px -34px;}
+.scbimgtabarrowup{background-position:-82px -45px;}
+#scbgreybar{position:relative;margin-left:auto;margin-right:auto;width:995px;height:86px;text-align:left;font-weight:normal;}
+#scbgreytab{z-index:200;position:absolute;left:725px;top:77px;display:block;width:46px;height:26px;background:transparent url(https://www22.verizon.com/images/headerfooter/scb31images.gif) no-repeat -637px -252px;text-align:center;}
+#scbtabtext{text-align:center;position:relative;display:block;}
+#scbtabdn{display:none;position:relative;margin-left:auto;margin-right:auto;text-align:center;}
+#scbtabup{display:block;position:relative;text-align:center;}
+#scbnogreybarspacer{position:relative;display:block;height:30px;}
+
+#scbweathercont{position:absolute;top:0;right:0;width:174px;height:85px;z-index:90;}
+#scbwbdata{position:absolute;top:25px;left:0;height:65px;width:160px;z-index:20;}
+#scbwbdata *{font-size:11px;text-align:left;}
+#scbwblink{position:relative;height:15px;width:120px;}
+#scbwbnotice{position:relative;color:#999;}
+#scbwbloc{position:absolute;top:0;left:0;margin-left:0;height:13px;line-height:10px;width:180px;}
+#scbwblinktext{line-height:12px;}
+#scbwbinput{position:absolute;top:-3px;left:0;margin-left:-9999px;width:70px;height:20px;}
+#scbwbtemps{position:absolute;top:15px;left:0;}
+#scbwbicon{padding-right:8px;}
+#scbwbtemp{font-size:22px;line-height:23px;font-weight:bold;color:#777;padding-right:4px;}
+#scbwbhilo{font-size:10px;font-weight:normal;color:#777;padding-left:10px;white-space:none;}
+#scbwbpb,
+#scbwbpb a{color:#999;font-size:10px;line-height:10px;}
+#scbwbpb a:hover{text-decoration:underline;}
+#scbtabdate{font-size:11px;font-weight:bold;}
+#scbloc{margin:0;display:block;}
+#scbwbzip{margin:0 5px 0 0;padding:0;width:45px;}
+* html #scbwbzip{height:16px;}
+#scbwbgo{width:15px;height:14px;background:transparent url(https://www22.verizon.com/images/headerfooter/scb31images.gif) no-repeat -267px -198px;}
+
+
+/*
+#scbrordcont{text-align:left;z-index:110001;position:absolute;top:150px;left:0;width:100%;height:1px;overflow:visible;}
+#scbrord{width:270px;margin-left:-135px;position:absolute;top:0;left:50%;font-size:12px;}
+.scbclose{width:15px;height:15px;background-position:-251px -198px;}
+.scbyes{width:41px;height:21px;background-position:-350px -177px;}
+.scbnotnow{width:98px;height:21px;background-position:-251px -177px;}
+.scbno{width:34px;height:21px;background-position:-392px -177px;}
+*/
+
+
+.rwgh{position:relative;width:100%;overflow:hidden;margin-bottom:10px;}
+.rwgh .t,
+.rwgh .tl,
+.rwgh .bl,
+.rwgh .bd{background:transparent url(https://www22.verizon.com/images/body/roundedheadergradbot.gif) no-repeat left bottom;}
+.rwgh .tl{position:absolute;left:0;top:0;width:12px;height:25px;background-color:#fff;background-position:left top;z-index:90;}
+.rwgh .bl{margin:-5000px 0 0 0;background-position:left bottom;z-index:99;width:12px;height:5000px;}
+.rwgh .t{position:relative;height:25px;margin-left:12px;background-position:right top;}
+.rwgh .t h1,
+.rwgh .bd h1{font-family:Arial,Helvetica,sans-serif;font-weight:bold;font-size:14px;line-height:25px;color:#000;margin:0;}
+.rwgh .t a:link,
+.rwgh .t a:visited{color:#06c;text-decoration:none;}
+.rwgh .t a:active,
+.rwgh .t a:hover{color:#06c;text-decoration:underline;}
+.rwgh .bd{margin-left:12px;background-color:#fff;background-position:bottom right;padding:10px 10px 20px 0;}
+.rwgh .bd div{position:relative;}
+.rwgh .bd a:link,
+.rwgh .bd a:hover,
+.rwgh .bd a:active{color:#06c;}
+.rwgh .bd a:visited{color:#636;}
+
+</style>
+
+<script type="text/javascript">
+var scbWB='';var scbVZ='';var scbSPL='';var scbMM='N';var scbMSV='N';var scbVC='N';var scbIP='N';var scbPP='';scbAdm='N';var scbVAS='N';var scbFS='N';var scbChecktest=false;scbfyhREC=false;var scbVHM='N';var scbHTP='N';var scbVHS='N';var scbbUP='N';var scbAcct='';var scbUP='UUUUUUU';var scbUP1='U';var scbUP2='U';var scbUP3='U';var scbUP4='U';var scbUP5='U';var scbUP6='U';var scbUP7='U';
+if(bLog20){
+scbWB=fnGetFullCookie('scb','wbzip');if(scbWB==null){scbWB='';}
+scbVZ=fnGetFullCookie('vzapps','ZIPCODE');if(scbVZ==null){scbVZ='';}
+if(bLog20&&bLog){scbSPL=fnGetFullCookie('SplProdOptIn');if(scbSPL==null){scbSPL='NNNN';}else{scbSPL=scbSPL.replace(/\%2C|\%2c|\,/g,'');}if(scbSPL.length>0){scbMM=scbSPL.charAt(0);}if(scbSPL.length>1){scbMSV=scbSPL.charAt(1);}if(scbSPL.length>2){scbVC=scbSPL.charAt(2);}if(scbSPL.length>3){scbIP=scbSPL.charAt(3);}scbPP=fnGetFullCookie('user_profile','partner');if(scbPP==null){scbPP='';}scbVAS=fnGetFullCookie('user_profile','vasonly');if(scbVAS==null||scbVAS==''){scbVAS='N';}if(fnGetFullCookie('foryourhome','VOLSTATUS')!=null||fnGetFullCookie('foryourhome','FEDSTATUS')!=null||fnGetFullCookie('eup')!=null){scbChecktest=true;}scbfyhREC=(fnGetFullCookie('foryourhome','REC')!=null);scbVHM=fnGetFullCookie('user_profile','vhm');if(scbVHM==null||scbVHM==''){scbVHM='N';}scbHTP=fnGetFullCookie('user_profile','htp');if(scbHTP==null||scbHTP==''){scbHTP='N';}scbVHS=fnGetFullCookie('user_profile','vhs');if(scbVHS==null||scbVHS==''){scbVHS='N';}scbbUP=fnGetFullCookie('user_profile');if(scbbUP==null){scbbUP='N';}else if(scbbUP.length>0){scbbUP='Y';}scbAcct=fnGetFullCookie('user_profile','account_type');if(scbAcct==null){scbAcct='';}scbUP=fnGetFullCookie('VzUpro');if(scbUP==null){scbUP='';}else{scbUP=scbUP.replace(/\%2C|\%2c|\,/g,'');}if(scbUP==''||scbUP.length<7){scbUP='UUUUUUU';}scbUP1=scbUP.charAt(0);scbUP2=scbUP.charAt(1);scbUP3=scbUP.charAt(2);scbUP4=scbUP.charAt(3);scbUP5=scbUP.charAt(4);scbUP6=scbUP.charAt(5);scbUP7=scbUP.charAt(6);}}
+</script>
+<script type="text/javascript">
+if(bLog20){
+if(document.cookie.length==0||scbChecktest){var scbC='';if(document.cookie.length==0){scbC='nc';}document.write('<scr'+'ipt type="text/javascript" src="https://www22.verizon.com/includes/cache/scbcheck.asp?cid='+scbC+scbWB+scbUP+scbVZ+'"><\/scr'+'ipt>');}
+document.write('<scr'+'ipt type="text/javascript" src="https://www22.verizon.com/includes/javascript/scb31.js"><\/scr'+'ipt>');
+}
+</script><script type="text/javascript" src="paymentoptions.aspx_files/scbcheck.js"></script><script type="text/javascript" src="paymentoptions.aspx_files/scb31.js"></script>
+<!-- mp_trans_add
+<div id="scbnoticecont" style="display:none;"><img src="https://www22.verizon.com/images/spacer.gif" width="1" height="1" alt="" id="scbinfo" style="position:absolute;top:10px;left:12px;" /><span id="scbesp" class="scbnotice">Please note that some of the content below may not be available in Spanish.</span></div>
+-->
+<script type="text/javascript">
+var scbwlh=(window.location.href).toLowerCase().substring(0,((window.location.href).toLowerCase().search(/goto=/)>-1)?(window.location.href).toLowerCase().search(/goto=/):999);
+if(scbwlh.indexOf('/foryourhome/myaccount/')>-1||scbwlh.indexOf('/enes/sdsurround/')>-1){dispLayer('scbnoticecont','block');}</script>
+
+<div id="scbheadercont">
+	<div id="scbheader">
+		<a href="http://www22.verizon.com/" name="&amp;lid=verizon_logo"><img alt="Verizon" title="Verizon" src="paymentoptions.aspx_files/spacer.gif" class="scbimg scbimglogo" border="0" height="1" width="1"></a>
+		<ul id="scbnav"><li class="scbimghome1" id="id203"><a hbxrootmenuorientation="down" hbxrootmenuid="//myvz2//home" class="menulink" href="http://www22.verizon.com/ForYourHome/MyAccount/Protected/Overview/MyOverview.aspx" name="&amp;lid=//myvz2//home">Home</a></li><li class="scbimgacct2" id="id1"><a hbxrootmenuorientation="down" hbxrootmenuid="//myvz2//account" class="menulink menulinkdiv" href="http://www22.verizon.com/ForYourHome/MyAccount/Protected/Account/MyAccountOverview.aspx" name="&amp;lid=//myvz2//account">Account</a><ul><li id="id2"><a href="http://www22.verizon.com/ForYourHome/MyAccount/Protected/Account/MyAccountOverview.aspx" name="&amp;lid=//myvz2//account//account+overview">Account Overview</a></li><li id="id3"><a class="subarrow" href="https://www22.verizon.com/ForYourHome/BillView/MyBill.aspx" name="&amp;lid=//myvz2//account//bill">Bill</a><ul><li id="id218"><a href="https://www22.verizon.com/ForYourHome/BillView/MyBill.aspx" name="&amp;lid=//myvz2//account//bill//view+bill">View Bill</a></li><li id="id222"><a href="https://www22.verizon.com/ForYourHome/BillView/PfbPage.aspx?ref=GH" name="&amp;lid=//myvz2//account//bill//paper+free+billing">Paper Free Billing</a></li></ul></li><li id="id4"><a class="subarrow" href="https://www22.verizon.com/ForYourHome/ebillpay/code/MyVerizon2/Code/PaymentOptions.aspx" name="&amp;lid=//myvz2//account//payment">Payment</a><ul><li id="id219"><a href="https://www22.verizon.com/ForYourHome/ebillpay/code/MyVerizon2/Code/PaymentOptions.aspx" name="&amp;lid=//myvz2//account//payment//make+a+payment">Make a Payment</a></li><li id="id220"><a href="https://www22.verizon.com/ForYourHome/ebillpay/code/MyVerizon2/Code/PaymentOptions.aspx?Target=EasyPay" name="&amp;lid=//myvz2//account//payment//easy+pay">Easy Pay</a></li></ul></li><li id="id9"><a target="" class="subarrow" href="http://www22.verizon.com/ForYourHome/MyAccount/Protected/Account/MyAccountProfile.aspx" name="&amp;lid=//myvz2//account//account+profile">Account Profile</a><ul><li id="id10"><a href="http://www22.verizon.com/ForYourHome/MyAccount/Protected/Account/MyAccountProfile.aspx" name="&amp;lid=//myvz2//account//account+profile//residential">Residential</a></li></ul></li><li id="id216"><a href="http://perks.verizon.com/" name="&amp;lid=//myvz2//account//my+perks">My Perks</a></li></ul></li><li class="scbimgmyvz1" id="id12"><a hbxrootmenuorientation="down" hbxrootmenuid="//myvz2//my+services" class="menulink menulinkdiv" href="http://www22.verizon.com/ForYourHome/MyAccount/Protected/Services/MyServices.aspx" name="&amp;lid=//myvz2//my+services">My Services</a><ul><li id="id13"><a href="http://www22.verizon.com/ForYourHome/MyAccount/Protected/Services/MyServices.aspx" name="&amp;lid=//myvz2//my+services//services+overview">Services Overview</a></li><li id="id14"><a class="subarrow" href="http://www22.verizon.com/ForYourHome/MyAccount/Protected/Services/MyServices.aspx#divInternet" name="&amp;lid=//myvz2//my+services//internet">Internet</a><ul><li id="id15"><a href="http://www22.verizon.com/ForYourHome/MyAccount/Protected/Services/MyServices.aspx#divInternet" name="&amp;lid=//myvz2//my+services//internet//overview">Internet Overview</a></li><li id="id16"><a href="http://webmail.verizon.com/signin/MyVzAuthorize?source=myvz&amp;action=email" name="&amp;lid=//myvz2//my+services//internet//email+and+more">Email &amp; More</a></li><li id="id17"><a href="https://my.verizon.com/central/vzc.portal?_nfpb=true&amp;_pageLabel=pws" name="&amp;lid=//myvz2//my+services//internet//personal+web+space">Personal Web Space</a></li><li id="id18"><a href="http://surround.verizon.com/Shop/Utilities/VerizonYourDomain.aspx" name="&amp;lid=//myvz2//my+services//internet//verizon+your+domain">Verizon Your Domain</a></li><li id="id19"><a href="http://surround.verizon.com/Shop/Utilities/OnlineBackupAndSharing.aspx" name="&amp;lid=//myvz2//my+services//internet//verizon+online+backup+and+sharing">Verizon Online Backup &amp; Sharing</a></li><li id="id20"><a href="http://surround.verizon.com/Shop/Utilities/InternetSecuritySuite.aspx" name="&amp;lid=//myvz2//my+services//internet//verizon+internet+security+suite">Verizon Internet Security Suite</a></li><li id="id21"><a href="http://parentalcontrolcenter.com/" target="_blank" name="&amp;lid=//myvz2//my+services//internet//parental+controls">Parental Controls</a></li><li id="id23"><a href="http://games.verizon.com/" target="_blank" name="&amp;lid=//myvz2//my+services//internet//verizon+games">Verizon Games</a></li><li id="id24"><a href="http://surround.verizon.com/Shop/ExpertCare/Default.aspx" name="&amp;lid=//myvz2//my+services//internet//verizon+expert+care">Verizon Expert Care</a></li><li id="id25"><a href="http://www22.verizon.com/ResidentialHelp/FiOSInternet/Networking/Setup/QuestionsOne/99209.htm" name="&amp;lid=//myvz2//my+services//internet//home+networking">Home Networking</a></li></ul></li></ul></li><li class="scbimgemail1" id="id42"><a hbxrootmenuorientation="down" hbxrootmenuid="//myvz2//email+and+more" class="menulink menulinkdiv" href="http://webmail.verizon.com/signin/MyVzAuthorize?source=myvz&amp;action=email" name="&amp;lid=//myvz2//email+and+more">Email &amp; More</a><ul><li id="id43"><a href="https://www22.verizon.com/myverizon/messages/router/" name="&amp;lid=//myvz2//email+and+more//email+and+more+overview">Email &amp; More Overview</a></li><li id="id137"><a href="http://webmail.verizon.com/signin/MyVzAuthorize?source=myvz&amp;action=email" name="&amp;lid=//myvz2//email+and+more//internet+emails">Emails</a></li><li id="id138"><a href="http://webmail.verizon.com/signin/MyVzAuthorize?source=myvz&amp;action=showcontacts" name="&amp;lid=//myvz2//email+and+more//internet+contacts">Contacts</a></li><li id="id52"><a href="https://text.vzw.com/customer_site/jsp/messaging_lo.jsp" target="_blank" name="&amp;lid=//myvz2//email+and+more//send+text+message">Send Text Message</a></li></ul></li><li class="scbimgmedia1" id="id53"><a hbxrootmenuorientation="down" hbxrootmenuid="//myvz2//entertainment" class="menulink menulinkdiv" href="http://media.verizon.com/media/" name="&amp;lid=//myvz2//entertainment">Entertainment</a><ul><li id="id54"><a href="http://media.verizon.com/media/" name="&amp;lid=//myvz2//entertainment//entertainment+overview">Entertainment Overview</a></li><li id="id55"><a class="subarrow" href="http://headlines.verizon.com/headlines/auth/fromSSO.jsp?target=http://headlines.verizon.com/headlines/portals/headlines.portal?" name="&amp;lid=//myvz2//entertainment//headlines">Headlines</a><ul><li id="id56"><a href="http://headlines.verizon.com/headlines/auth/fromSSO.jsp?target=http://headlines.verizon.com/headlines/portals/headlines.portal?" name="&amp;lid=//myvz2//entertainment//headlines//frontpage">Front Page</a></li><li id="id57"><a href="http://headlines.verizon.com/headlines/auth/fromSSO.jsp?target=http://headlines.verizon.com/headlines/portals/headlines.portal?_nfpb=true&amp;_nfto=false&amp;_pageLabel=headlines_portal_page_us_home" name="&amp;lid=//myvz2//entertainment//headlines//us">US</a></li><li id="id58"><a href="http://headlines.verizon.com/headlines/auth/fromSSO.jsp?target=http://headlines.verizon.com/headlines/portals/headlines.portal?_nfpb=true&amp;_nfto=false&amp;_pageLabel=headlines_portal_page_world_home" name="&amp;lid=//myvz2//entertainment//headlines//world">World</a></li><li id="id59"><a href="http://headlines.verizon.com/headlines/auth/fromSSO.jsp?target=http://headlines.verizon.com/headlines/portals/headlines.portal?_nfpb=true&amp;_nfto=false&amp;_pageLabel=headlines_portal_page_politics_home" name="&amp;lid=//myvz2//entertainment//headlines//politics">Politics</a></li><li id="id60"><a href="http://headlines.verizon.com/headlines/auth/fromSSO.jsp?target=http://headlines.verizon.com/headlines/portals/headlines.portal?_nfpb=true&amp;_nfto=false&amp;_pageLabel=headlines_portal_page_sports_home" name="&amp;lid=//myvz2//entertainment//headlines//sports">Sports</a></li><li id="id61"><a href="http://headlines.verizon.com/headlines/auth/fromSSO.jsp?target=http://headlines.verizon.com/headlines/portals/headlines.portal?_nfpb=true&amp;_nfto=false&amp;_pageLabel=headlines_portal_page_finance_home" name="&amp;lid=//myvz2//entertainment//headlines//finance">Finance</a></li><li id="id62"><a href="http://headlines.verizon.com/headlines/auth/fromSSO.jsp?target=http://headlines.verizon.com/headlines/portals/headlines.portal?_nfpb=true&amp;_nfto=false&amp;_pageLabel=headlines_portal_page_travel_home" name="&amp;lid=//myvz2//entertainment//headlines//travel">Travel</a></li><li id="id63"><a href="http://headlines.verizon.com/headlines/auth/fromSSO.jsp?target=http://headlines.verizon.com/headlines/portals/headlines.portal?_nfpb=true&amp;_pageLabel=headlines_portal_page_mediaroom" name="&amp;lid=//myvz2//entertainment//headlines//video">Video</a></li></ul></li><li id="id64"><a class="subarrow" href="http://surround.verizon.com/" name="&amp;lid=//myvz2//entertainment//entertainment">Entertainment</a><ul><li id="id65"><a href="http://surround.verizon.com/movies/" name="&amp;lid=//myvz2//entertainment//entertainment//movies">Movies</a></li><li id="id66"><a href="http://surround.verizon.com/music/" name="&amp;lid=//myvz2//entertainment//entertainment//music">Music</a></li><li id="id67"><a href="http://surround.verizon.com/people/" name="&amp;lid=//myvz2//entertainment//entertainment//people">People</a></li><li id="id150"><a href="http://surround.verizon.com/sports/" name="&amp;lid=//myvz2//entertainment//entertainment//sports">Sports</a></li></ul></li><li id="id73"><a class="subarrow" href="https://www36.verizon.com/fiostv/web/signin.aspx" name="&amp;lid=//myvz2//entertainment//tv">TV</a><ul><li id="id76"><a href="https://www36.verizon.com/fiostv/web/signin.aspx" name="&amp;lid=//myvz2//entertainment//tv//tv+home">TV Home</a></li><li id="id158"><a href="https://www36.verizon.com/fiostv/web/unprotected/Packages.aspx" name="&amp;lid=//myvz2//entertainment//tv//my+tv">My TV</a></li><li id="id74"><a href="https://www36.verizon.com/fiostv/web/unprotected/RecordShows.aspx" name="&amp;lid=//myvz2//entertainment//tv//dvr">DVR</a></li><li id="id77"><a href="https://www36.verizon.com/fiostv/web/unprotected/Spotlight.aspx" name="&amp;lid=//myvz2//entertainment//tv//tv+listings">TV Listings</a></li><li id="id75"><a href="https://www36.verizon.com/fiostv/web/unprotected/OnDemandHome.aspx" name="&amp;lid=//myvz2//entertainment//tv//on+demand">On Demand</a></li></ul></li><li id="id82"><a href="http://games.verizon.com/" target="_blank" name="&amp;lid=//myvz2//entertainment//verizon+games">Verizon Games</a></li><li id="id88"><a target="" class="subarrow" href="https://www36.verizon.com/fiostv/web/unprotected/Apps_Overview.aspx" name="&amp;lid=//myvz2//entertainment//apps">Apps</a><ul><li id="id223"><a href="https://www36.verizon.com/fiostv/web/unprotected/Apps_Overview.aspx" name="&amp;lid=//myvz2//entertainment//apps//apps+overview">Apps Overview</a></li><li id="id224"><a href="https://www36.verizon.com/fiostv/web/unprotected/MediaManager.aspx?APName=Apps" name="&amp;lid=//myvz2//entertainment//apps//computer">Computer</a></li><li id="id168"><a href="https://www36.verizon.com/fiostv/web/unprotected/Apps_Mobile.aspx" name="&amp;lid=//myvz2//entertainment//apps//mobile">Mobile</a></li><li id="id90"><a href="https://www36.verizon.com/fiostv/web/unprotected/Widgets.aspx?APName=Apps" name="&amp;lid=//myvz2//entertainment//apps//tv">TV</a></li></ul></li></ul></li><li class="scbimgshop1" id="id91"><a hbxrootmenuorientation="down" hbxrootmenuid="//myvz2//shop" class="menulink menulinkdiv" href="http://shop.verizon.com/" name="&amp;lid=//myvz2//shop">Shop</a><ul><li id="id92"><a href="http://shop.verizon.com/" name="&amp;lid=//myvz2//shop//shop+overview">Shop Overview</a></li><li id="id186"><a class="subarrow" href="http://www22.verizon.com/Residential/aboutFiOS/" name="&amp;lid=//myvz2//shop//about+fios">About FiOS</a><ul><li id="id202"><a href="http://www22.verizon.com/Residential/aboutFiOS/" name="&amp;lid=//myvz2//shop//about+fios//about+fios+overview">About FiOS Overview</a></li><li id="id187"><a href="http://www22.verizon.com/Residential/aboutFiOS/Overview.htm" name="&amp;lid=//myvz2//shop//about+fios//fios+features">FiOS Features</a></li><li id="id189"><a href="http://www22.verizon.com/Residential/aboutfios/spotlight/spotlight.htm" name="&amp;lid=//myvz2//shop//about+fios//fios+spotlight">FiOS Spotlight</a></li><li id="id190"><a href="http://www22.verizon.com/Residential/aboutFiOS/CustomerExperiences/CustomerExperiences.htm" name="&amp;lid=//myvz2//shop//about+fios//reviews+and+testimonials">Customer Experiences</a></li></ul></li><li id="id101"><a class="subarrow" href="http://www22.verizon.com/Residential/TV/" name="&amp;lid=//myvz2//shop//tv">TV</a><ul><li id="id103"><a href="http://www22.verizon.com/Residential/TV/" name="&amp;lid=//myvz2//shop//tv//tv+overview">TV Overview</a></li><li id="id173"><a href="http://www22.verizon.com/Residential/FiOSTV/" name="&amp;lid=//myvz2//shop//tv//fios+tv">FiOS TV</a></li><li id="id174"><a href="http://www22.verizon.com/home/directv/" name="&amp;lid=//myvz2//shop//tv//directv">DIRECTV®</a></li><li id="id106"><a href="http://surround.verizon.com/Shop/ExpertCare/Default.aspx" name="&amp;lid=//myvz2//shop//tv//verizon+expert+care">Verizon Expert Care</a></li><li id="id107"><a href="http://www22.verizon.com/residential/specialoffers/" name="&amp;lid=//myvz2//shop//tv//special+offers">Special Offers</a></li></ul></li><li id="id93"><a class="subarrow" href="http://www22.verizon.com/Residential/Internet/" name="&amp;lid=//myvz2//shop//internet">Internet</a><ul><li id="id95"><a href="http://www22.verizon.com/Residential/Internet/" name="&amp;lid=//myvz2//shop//internet//internet+overview">Internet Overview</a></li><li id="id171"><a href="http://www22.verizon.com/Residential/FiOSInternet/" name="&amp;lid=//myvz2//shop//internet//fios+internet">FiOS Internet</a></li><li id="id172"><a href="http://www22.verizon.com/Residential/HighSpeedInternet/" name="&amp;lid=//myvz2//shop//internet//high+speed+internet">High Speed Internet</a></li><li id="id96"><a href="http://surround.verizon.com/Shop/Utilities/Default.aspx" name="&amp;lid=//myvz2//shop//internet//security+and+storage">Security &amp; Storage</a></li><li id="id97"><a href="http://surround.verizon.com/Shop/Entertainment/Default.aspx" name="&amp;lid=//myvz2//shop//internet//music+and+video">Music &amp; Video</a></li><li id="id98"><a href="http://surround.verizon.com/Shop/Gaming/Default.aspx" name="&amp;lid=//myvz2//shop//internet//gaming">Gaming</a></li><li id="id99"><a href="http://surround.verizon.com/Shop/ExpertCare/Default.aspx" name="&amp;lid=//myvz2//shop//internet//verizon+expert+care">Verizon Expert Care</a></li><li id="id100"><a href="http://www22.verizon.com/residential/specialoffers/" name="&amp;lid=//myvz2//shop//internet//special+offers">Special Offers</a></li></ul></li><li id="id108"><a class="subarrow" href="http://www22.verizon.com/Residential/HomePhone/" name="&amp;lid=//myvz2//shop//phone">Phone</a><ul><li id="id181"><a href="http://www22.verizon.com/Residential/HomePhone/" name="&amp;lid=//myvz2//shop//phone//phone+overview">Phone Overview</a></li><li id="id191"><a href="http://www22.verizon.com/Residential/HomePhone/FiOSDigitalVoice/" name="&amp;lid=//myvz2//shop//phone//fios+digital+voice">FiOS Digital Voice</a></li><li id="id109"><a href="http://www22.verizon.com/Residential/HomePhone/FreedomUnlimitedCalling/" name="&amp;lid=//myvz2//shop//phone//standard+plans">Standard Plans</a></li><li id="id114"><a href="http://surround.verizon.com/Shop/ExpertCare/Default.aspx" name="&amp;lid=//myvz2//shop//phone//verizon+expert+care">Verizon Expert Care</a></li><li id="id115"><a href="http://www22.verizon.com/residential/specialoffers/" name="&amp;lid=//myvz2//shop//phone//special+offers">Special Offers</a></li></ul></li><li id="id116"><a target="_blank" class="subarrow" href="https://www.verizonwireless.com/b2c/accountholder/estore/phoneupgrade" name="&amp;lid=//myvz2//shop//wireless">Wireless</a><ul><li id="id117"><a href="https://www.verizonwireless.com/b2c/accountholder/estore/phoneupgrade" target="_blank" name="&amp;lid=//myvz2//shop//wireless//upgrade">Upgrade</a></li><li id="id118"><a href="https://www.verizonwireless.com/b2c/accountholder/estore/addaline" target="_blank" name="&amp;lid=//myvz2//shop//wireless//add+a+line">Add a Line</a></li><li id="id119"><a href="https://www.verizonwireless.com/b2c/store/accessories" target="_blank" name="&amp;lid=//myvz2//shop//wireless//accessories">Accessories</a></li><li id="id120"><a href="https://www.verizonwireless.com/b2c/accountholder/estore/changeplan" target="_blank" name="&amp;lid=//myvz2//shop//wireless//add+change+plan">Add/Change Plan</a></li><li id="id121"><a href="https://myaccount.verizonwireless.com/clp/login?redirect=/vzw/accountholder/services/viewFeatures.action" target="_blank" name="&amp;lid=//myvz2//shop//wireless//add+features">Add Features</a></li><li id="id122"><a href="http://mediastore.verizonwireless.com/onlineContentStore/index.html" target="_blank" name="&amp;lid=//myvz2//shop//wireless//media">Media</a></li><li id="id123"><a href="http://www.verizonwireless.com/b2c/store/controller?item=giftCardItem&amp;action=viewGiftCards" target="_blank" name="&amp;lid=//myvz2//shop//wireless//gift+cards">Gift Cards</a></li></ul></li><li id="id124"><a href="http://www22.verizon.com/residential/bundles/overview#fios" name="&amp;lid=//myvz2//shop//bundles">Bundles</a></li><li id="id192"><a href="https://www22.verizon.com/FORYOURHOME/GOFLOW/Residential/OrderNewService.aspx" name="&amp;lid=//myvz2//shop//order">Order</a></li></ul></li><li class="scbimgsupport1" id="id125"><a hbxrootmenuorientation="down" hbxrootmenuid="//myvz2//support" class="menulink menulinkdiv" href="http://www22.verizon.com/residentialhelp/" name="&amp;lid=//myvz2//support">Support</a><ul><li id="id126"><a href="http://www22.verizon.com/residentialhelp/" name="&amp;lid=//myvz2//support//support+overview">Support Overview</a></li><li id="id127"><a class="subarrow" href="http://www22.verizon.com/residentialhelp/fiosinternet/" name="&amp;lid=//myvz2//support//internet">Internet</a><ul><li id="id175"><a href="http://www22.verizon.com/residentialhelp/fiosinternet/" name="&amp;lid=//myvz2//support//internet//fios+internet">FiOS Internet</a></li><li id="id176"><a href="http://www22.verizon.com/residentialhelp/highspeed/" name="&amp;lid=//myvz2//support//internet//high+speed+internet">High Speed Internet</a></li><li id="id177"><a href="http://www22.verizon.com/residentialhelp/dialup/" name="&amp;lid=//myvz2//support//internet//dial+up">Dial-Up</a></li></ul></li><li id="id128"><a class="subarrow" href="http://www22.verizon.com/residentialhelp/fiostv/" name="&amp;lid=//myvz2//support//tv">TV</a><ul><li id="id178"><a href="http://www22.verizon.com/residentialhelp/fiostv/" name="&amp;lid=//myvz2//support//tv//fios+tv">FiOS TV</a></li><li id="id179"><a href="http://www22.verizon.com/residentialhelp/generic/directv/" name="&amp;lid=//myvz2//support//tv//directv">DIRECTV®</a></li></ul></li><li id="id129"><a href="http://www22.verizon.com/residentialhelp/phone/" name="&amp;lid=//myvz2//support//phone">Phone</a></li><li id="id217"><a href="https://my.verizon.com/whatsnext/" name="&amp;lid=//myvz2//support//order+status">Order Status</a></li><li id="id215"><a href="http://forums.verizon.com/" name="&amp;lid=//myvz2//support//forums">Forums</a></li><li id="id180"><a href="http://www22.verizon.com/content/sso/community.aspx" name="&amp;lid=//myvz2//support//community">Community</a></li></ul></li></ul>
+		
+		<script type="text/javascript">if(bLog20){var strMenuURL='';var scbUPro='UUUUUUU';var strAT='';var strFS='N';var strFSW='N';var strbUP='N';var strSPL='';var strVHM='N';var strHTP='N';var strVHS='N';if(typeof(bLog)!='undefined'&&bLog){if(typeof(scbUP)!='undefined'&&scbUP.length>=6){scbUPro=scbUP;}if(typeof(scbAcct)!='undefined'&&scbAcct!=''){strAT=scbAcct;}if(typeof(scbFS)!='undefined'&&scbFS!=''){strFS=scbFS;}if(typeof(scbFSW)!='undefined'&&scbFSW!=''){strFSW=scbFSW;}if(typeof(scbbUP)!='undefined'&&scbbUP!=''){strbUP=scbbUP;}if(typeof(scbSPL)!='undefined'&&scbSPL!=''){strSPL=scbSPL;}if(typeof(scbAdm)!='undefined'&&scbAdm!='Y'){scbAdm='N';}if(typeof(scbVHM)!='undefined'&&scbVHM!=''){strVHM=scbVHM;}if(typeof(scbHTP)!='undefined'&&scbHTP!=''){strHTP=scbHTP;}if(typeof(scbVHS)!='undefined'&&scbVHS!=''){strVHS=scbVHS;}}if(bLog){strMenuURL='/0,,vzup-'+scbUPro+'_at-'+strAT+'_fs-'+strFS+'_fsw-'+strFSW+'_up-'+strbUP+'_spl-'+strSPL+'_pp-'+scbPP+'_hc-'+strVHM+strHTP+strVHS+'_vas-'+scbVAS+'_adm-'+scbAdm+',00.js';}var hID=document.getElementsByTagName('head')[0];var oScr=document.createElement('script');oScr.type='text/javascript';oScr.src='https://www22.verizon.com/includes/javascript/scb31menu.js'+strMenuURL;hID.appendChild(oScr);}</script>
+		
+		<div id="scbuser"><div style="position:absolute;top:0;right:0;">
+			<div style="display: block;" id="scbuserdivon"><img alt="" src="paymentoptions.aspx_files/spacer.gif" class="scbimg scbuseron" border="0" height="1" width="1"><a id="scbusername" class="scbusernamelink" href="http://www22.verizon.com/ForYourHome/MyAccount/Protected/Account/MyAccountProfile.aspx">Welcome&nbsp;JOHN,</a><!-- mp_trans_remove_start --><a href="javascript:scbSignOut();">Sign&nbsp;Out</a><!-- mp_trans_remove_end --><!-- mp_trans_add<a href="https://signin.verizon.com/sso/logout/logout.jsp?target=https%3A%2F%2Fwww22.verizon.com%2Fsso%2Fcommon%2Flogout.asp%3FlogoutURL%3Dhttps%253A%252F%252Fwww22.verizon.com%252Fmyverizon%252Fsignout%252F">Sign&nbsp;Out</a>--></div>
+			<div id="scbuserdivoff"><img alt="" title="" src="paymentoptions.aspx_files/spacer.gif" class="scbimg scbuseroff" border="0" height="1" width="1"><script type="text/javascript">var scbSI='http://www22.verizon.com/Foryourhome/MyAccount/Unprotected/UserManagement/Login/Login.aspx';var scbGoto='';
+			if((window.location.pathname).toLowerCase().indexOf('/foryourhome/myaccount/unprotected/usermanagement/login/login.aspx')!=0){scbGoto='?goto='+escape(window.location.href);}if((window.location.href).indexOf('https://www36.verizon.com/fiostv')>-1||(window.location.href).indexOf('http://www36.verizon.com/fiostv')>-1){scbSI='https://www36.verizon.com/fiostv/web/Signin.aspx';scbGoto='';}document.write('<a href="'+scbSI+scbGoto+'">SIGN&nbsp;IN<\/a>');</script><a href="http://www22.verizon.com/Foryourhome/MyAccount/Unprotected/UserManagement/Login/Login.aspx?goto=https%3A//www22.verizon.com/ForYourHome/ebillpay/code/MyVerizon2/Code/paymentoptions.aspx">SIGN&nbsp;IN</a><noscript><a href="http://www22.verizon.com/Foryourhome/MyAccount/Unprotected/UserManagement/Login/Login.aspx">SIGN&nbsp;IN</a></noscript></div>
+			<script type="text/javascript">if(bLog20){if(bLog){dispLayer('scbuserdivon','block');var sFN=fnGetFullCookie('foryourhome','FirstName');if(sFN!=null){sFN=sFN.replace(/\%/g,'-');}else{sFN='';}var sGN=fnGetFullCookie('foryourhome','GNAME');if(sGN!=null){sGN=sGN.replace(/\%/g,'-');}else{sGN='';}var hID=document.getElementsByTagName('head')[0];var oScr=document.createElement('script');oScr.type='text/javascript';oScr.src='https://www22.verizon.com/includes/cache/scbname31.asp?cid='+sFN+'_'+sGN;hID.appendChild(oScr);}else{dispLayer('scbuserdivoff','block');}}</script>
+			
+				<!-- mp_trans_add  
+				<span>|</span><a mporgnav href="http://espanol.verizon.com/" onclick="return switchLanguage('es');function switchLanguage(lang){MP.SrcUrl=unescape('mp_js_orgin_url');MP.UrlLang='mp_js_current_lang';MP.init();MP.switchLanguage(MP.UrlLang==lang?'en':lang);return false;}">Espa&ntilde;ol</a>
+				-->
+				<!-- mp_trans_remove_start -->
+				<script type="text/javascript">
+					var boolEL=false;
+					var scbLHR=(window.location.href).toLowerCase().substring(0,((window.location.href).toLowerCase().search(/goto=/)>-1)?(window.location.href).toLowerCase().search(/goto=/):999);
+
+					
+					var boolEL=true;
+					var arrEspURLPattern=new Array('newsroom.verizon.com/','headlines.verizon.com/','surround.verizon.com/default.aspx','forums.verizon.com','perks.verizon.com');
+					for(i=0;i<arrEspURLPattern.length;i++){if((scbLHR.toLowerCase()).indexOf(arrEspURLPattern[i])!=-1){boolEL=false;break;}}
+					
+					var arrEspURLMatch=new Array('surround.verizon.com/');
+					var scbURL=window.location.hostname+window.location.pathname;
+					for(i=0;i<arrEspURLMatch.length;i++){if(scbURL.toLowerCase()==arrEspURLMatch[i]){boolEL=false;break;}}
+					
+				if(boolEL){document.write('<span>|<\/span><a mporgnav href="http://espanol.verizon.com/" onclick="return switchLanguage(\'es\');function switchLanguage(lang){MP.SrcUrl=unescape(\'mp_js_orgin_url\');MP.UrlLang=\'mp_js_current_lang\';MP.init();MP.switchLanguage(MP.UrlLang==lang?\'en\':lang);return false;}">Espa&ntilde;ol<\/a>');}
+				</script><span>|</span><a mporgnav="" href="http://espanol.verizon.com/" onclick="return switchLanguage('es');function switchLanguage(lang){MP.SrcUrl=unescape('mp_js_orgin_url');MP.UrlLang='mp_js_current_lang';MP.init();MP.switchLanguage(MP.UrlLang==lang?'en':lang);return false;}">Español</a>
+				<!-- mp_trans_remove_end -->
+			
+		</div></div>
+	</div>
+</div><!-- mp_trans_remove_start -->
+<div id="scbTBcont" style="display: block; margin-top: -24px;"><div class="scbTBtext"><div style="padding:3px 0;"><img alt="" class="scbinfoimg" src="paymentoptions.aspx_files/spacer.gif" style="margin: 0pt 8px 0pt 15px; float: left;" height="1" width="1"><div style="float:left;line-height:17px;font-weight:bold;font-size:12px;color:#000;">Verizon Toolbar gives you Google search plus games, shopping and more.</div><a href="#" onclick="scbNoTB(3);return false;"><img alt="No, thanks" title="No, thanks" id="scbTBno" src="paymentoptions.aspx_files/spacer.gif" border="0" height="1" width="1"></a><a href="http://www22.verizon.com/ForYourHome/MyAccount/Unprotected/Toolbar/6/Download.aspx" onclick="return scbAddTB();"><img alt="Start now" title="Start now" src="paymentoptions.aspx_files/spacer.gif" id="scbTBstart" border="0" height="1" width="1"></a></div></div></div><script type="text/javascript">if(bLog20&&typeof(scbTBcheck)!='undefined'&&!scbUpgrade&typeof(bHide)!='undefined'&&!bHide){scbTBcheck();}</script>
+<!-- mp_trans_remove_end -->
+
+<div id="scbgreybarcont" style="height:97px;margin-top:0;" onmouseover="scbHov=true;" onmouseout="scbHov=false;">
+	<script type="text/javascript">if(typeof(bHdGry)!='undefined'&&bHdGry){document.getElementById("scbgreybarcont").style.marginTop=greyOff+"px";}</script>
+	<div id="scbgreybar">
+
+		<table id="scbmyvzpp" border="0" cellpadding="0" cellspacing="0"><tbody><tr><td style="" align="center">
+		<img src="paymentoptions.aspx_files/spacer.gif" class="scbimg scbimgmyvz" alt="My Verizon" title="My Verizon" height="1" width="1"><br>
+		
+		<div id="scbppicon"><script type="text/javascript">if(typeof(scbPPfn)!='undefined'){scbPPfn();}</script></div>
+		
+		</td></tr></tbody></table>
+		<script type="text/javascript" src="paymentoptions.aspx_files/scbsearch.js"></script>
+<style type="text/css">
+#scb3searchcont{position:relative;top:15px;left:150px;width:639px;height:71px;background:transparent url(https://www22.verizon.com/images/headerfooter/scb31images.gif) no-repeat 0 -282px;z-index:200;}
+#scb3searchtabscont{position:absolute;left:127px;top:0;height:19px;}
+#scb3searchtabscont{font-family:Arial,Helvetica,sans-serif;float:left;width:405px;font-size:93%;line-height:normal;z-index:220;}
+#scb3searchtabscont ul{margin:0;padding:0;list-style:none;}
+#scb3searchtabscont li{float:left;background:url(https://www22.verizon.com/images/headerfooter/scb31images.gif) no-repeat left -373px;margin:0 3px 0 0;padding:0 0 0 2px;}
+#scb3searchtabscont a{float:left;display:block;background:url(https://www22.verizon.com/images/headerfooter/scb31images.gif) no-repeat right -373px;line-height:17px;padding:0 10px 0 8px;text-decoration:none;font-size:11px;color:#000;}
+#scb3searchtabscont a:hover{color:#000;}
+#scb3searchtabscont a:link,#scb3searchtabscont a:hover,#scb3searchtabscont a:active,#scb3searchtabscont a:visited{outline:none;text-decoration:none;}
+#scb3searchtabscont li.current{background:url(https://www22.verizon.com/images/headerfooter/scb31images.gif) no-repeat left -354px;padding:0 0 0 2px;}
+#scb3searchtabscont li.current a{float:left;display:block;background:url(https://www22.verizon.com/images/headerfooter/scb31images.gif) no-repeat right -354px;font-size:11px;font-weight:bold;color:#000;line-height:18px;padding:0 10px 0 8px;}
+#scb3searchinputbox{position:absolute;top:17px;left:127px;width:405px;height:29px;background:transparent url(https://www22.verizon.com/images/headerfooter/scb31images.gif) no-repeat -181px -252px;z-index:210;}
+.scb3searchinput{position:absolute;top:5px;left:5px;width:394px !important;height:21px !important;line-height:19px;z-index:230;font-size:13px !important;border-width:0 !important;padding:0 !important;margin:0 !important;background:transparent;}
+input.scb3searchinput:focus{outline-width:0;}
+#scb3srcprovider{position:absolute;top:13px;left:22px;width:81px;height:40px;}
+.scb3srcwww{background:url(https://www22.verizon.com/images/headerfooter/scb31images.gif) no-repeat -378px -211px;}
+#scb3searchbtncont{position:absolute;top:0;left:415px;float:left;}
+#scb3searchbtncont *{outline:none;height:29px;line-height:29px;}
+#scb3searchbtncont a:hover,#scb3searchbtncont a:active{text-decoration:none;outline:none;}
+a.scb3btnred{float:left;padding-right:10px;text-decoration:none;background:#f7f7f7 url(https://www22.verizon.com/images/headerfooter/scb31images.gif) no-repeat right -177px;}
+a.scb3btnred span{cursor:hand;cursor:pointer;display:block;text-decoration:none;color:#fff;font:normal 18px Arial,Helvetica,sans-serif;text-decoration:none;padding-left:10px;background:#f7f7f7 url(https://www22.verizon.com/images/headerfooter/scb31images.gif) no-repeat -510px -177px;}
+#scb3searchbtntext{text-decoration:none;font-weight:normal;font-size:18px;font-family:Arial,Helvetica,sans-serif;color:#fff;}
+#scbsearchtoplinks{position:absolute;top:49px;left:129px;}
+#scbsearchtoplinks *{font-size:11px;font-family:Arial,Helvetica,sans-serif;color:#000;}
+#scbsearchtoplinks span{padding-right:10px;}
+.scb3srcnextag{background:url(https://www22.verizon.com/images/headerfooter/scb31images.gif) no-repeat -459px -211px;}
+.scb3srcverizon{background:url(https://www22.verizon.com/images/headerfooter/scb31images.gif) no-repeat -540px -211px;}
+</style>
+<div id="scb3searchcustom"></div>
+<div id="scb3searchcont" style="display: block;">
+<img title="Powered by Google" src="paymentoptions.aspx_files/spacer.gif" alt="" id="scb3srcprovider" class="scb3srcwww" height="1" width="1">
+<div id="scb3searchtabscont"><ul id="scb3searchtabs" style="display:block;"><li class="current" id="scbSrcw"><a href='javascript:scbSetSearch("w");'>Web</a></li><li class="" id="scbSrcsh"><a href='javascript:scbSetSearch("sh");'>Shop</a></li><li class="" id="scbSrcs"><a href='javascript:scbSetSearch("s");'>Site &amp; Support</a></li></ul></div>
+<div id="scb3searchinputbox">
+<form name="scbsearchform" id="scbsearchform" method="get" action="http://searchservices.verizon.com/search/ws.portal?&amp;_nfpb=true&amp;_pageLabel=google_results&amp;rs=&amp;web_search_type=basic&amp;sc=web&amp;channel=MyVrzn&amp;clientid=Cnsmr&amp;q=" onsubmit="scbCkSrcVal(document.scbsearchform);return false;" style="margin:0;display:inline;">
+<label for="scbsearchinput">
+<input style="color: rgb(153, 153, 153);" name="q" id="scbsearchinput" class="scb3searchinput" value="Search the Web" onfocus="scbSearchQ(this,scbSrcType,'focus');this.style.color='#000';" onblur="if(this.value==''){this.style.color='#999';this.value=scbSrcqTypeText;}" maxlength="100" title="Search the Web" type="text"></label>
+<div id="scb3searchbtncont"><a id="scb3searchbtn" name="scb3searchbtn" class="scb3btnred" href="#" onclick="scbCkSrcVal(document.scbsearchform);return false;"><span id="scb3searchbtntext">Search</span></a></div>
+</form>
+</div>
+<div style="display: block;" id="scbsearchtoplinks"></div></div>
+		<div id="scbgreytab" style="display:none;">
+			<script type="text/javascript">if(typeof(bHide)!='undefined'&&bHide){dispLayer('scbgreytab','block');}</script>
+			<div id="scbtabtext">
+				<div id="scbtabdn"><img class="scbimg scbimgtabarrowdn" alt="" src="paymentoptions.aspx_files/spacer.gif" border="0" height="1" width="1"><a href="#" onclick="togglegrey();this.blur();return false;" style="color: black; z-index: 2;"><img alt="" src="paymentoptions.aspx_files/spacer.gif" border="0" height="26" width="46"></a></div>
+				<div id="scbtabup"><img class="scbimg scbimgtabarrowup" alt="" src="paymentoptions.aspx_files/spacer.gif" border="0" height="1" width="1"><a href="#" onclick="togglegrey();this.blur();return false;" style="z-index: 2;"><img alt="" src="paymentoptions.aspx_files/spacer.gif" border="0" height="26" width="46"></a></div>
+			</div>
+		</div>
+		<script type="text/javascript">if(typeof(bHdGry)!='undefined'&&bHdGry){greyNegMar=(greyOn-greyOff)*-1;document.getElementById('scbgreybarcont').style.marginTop=greyNegMar+'px';greyout();}</script>
+
+		<div id="scbweathercont" title="">
+			<script type="text/javascript">if(typeof(bHdGry)!='undefined'&&bHdGry){dispLayer('scbweathercont','none');}</script>
+			<div id="scbwbdata">
+				<div id="scbwblink"><div id="scbwbloc"><a href="#" onclick="mvLayer('scbwbloc',-9999,'scbwbinput',0);var objsbLoc=fObj('scbwbzip');if(objsbLoc!=null){objsbLoc.select();}return false;" id="scbwblinktext" style="color: rgb(0, 102, 204);">Glassboro,&nbsp;NJ&nbsp;08028</a></div><div id="scbwbinput"><form id="scbloc" name="scbloc" action="javascript:void(0);" onsubmit="return scbZIPcheck(document.scbloc);"><input name="scbwbsave" value="08028" type="hidden"><table border="0" cellpadding="0" cellspacing="0"><tbody><tr><td><input id="scbwbzip" name="scbwbzip" style="font-size: 11px; font-family: Arial,Helvetica,sans-serif;" size="5" maxlength="5" value="08028" onblur="return scbZIPcheck(document.scbloc);" onkeypress="var cz=scbCheckZIP(this,event);return cz;" type="text"></td><td><input id="scbwbgo" src="paymentoptions.aspx_files/spacer.gif" name="Go" alt="Go" type="image"></td></tr></tbody></table></form></div></div>
+				<div id="scbwbnotice"></div>
+				<div id="scbwbtemps"><table border="0" cellpadding="0" cellspacing="0"><tbody><tr><td id="scbwbicon"><a href="http://weather.weatherbug.com/NJ/Glassboro-weather.html?zcode=z6726&amp;zip=08028" target="_blank"><img src="paymentoptions.aspx_files/08partlyCloudyNight.jpg" alt="Partly Cloudy" title="Partly Cloudy" border="0" height="33" width="33"></a></td><td id="scbwbtemp">73°F</td><td id="scbwbhilo"><br>Lo&nbsp;61°F</td></tr><tr><td colspan="3" id="scbwbpb">Powered&nbsp;by&nbsp;<a href="http://weather.weatherbug.com/NJ/Glassboro-weather.html?zcode=z6726&amp;zip=08028" target="_blank" style="color: rgb(0, 102, 204);">WeatherBug</a></td></tr></tbody></table></div>
+				<script type="text/javascript">
+				if(typeof(scbWB)!='undefined'&&scbWB.length==5){strZIP=scbWB;}
+				else if(typeof(scbVZ)!='undefined'&&scbVZ.length==5){strZIP=scbVZ;}
+				else{strZIP="10011";}
+				document.scbloc.scbwbzip.value=strZIP;document.scbloc.scbwbsave.value=strZIP;if((typeof(bHdGry)!='undefined'&&!bHdGry)&&(bLog20)){getWB(strZIP);}
+				</script>
+			</div>
+		</div>
+
+	</div>
+
+</div>
+	</div>
+
+</noindex>
+<!--googleon: all-->
+
+
+<div id="ghfbodycont">
+	<div id="ghfbody" style="width:995px;"><a name="content"></a>
+		<script type="text/javascript">
+			if(typeof(b100p)!='undefined'&&b100p)document.getElementById('ghfbody').style.width='99%';</script>
+		<div id="ghfbodycontent"><div>
+<!-- ************ End : Single Code Base Header ************ -->
+
+    <div class="black_overlay" id="fade" style="display: none; position: absolute; z-index: 1010">
+    </div>
+    <div class="black_overlay1xCC" id="dix1xCCPopup" style="display: none; position: absolute;
+        z-index: 1010">
+    </div>
+    <div style="display: none; visibility: hidden; z-index: 2000; left: 90px; vertical-align: middle;
+        width: 500px; position: absolute; background-color: #e8e8e8; height: 300px; border: 2px solid gray;" id="blkDenrollment" align="center">
+        <table border="0" cellpadding="0" cellspacing="0" height="300" width="500">
+            <tbody><tr>
+                <td width="440">
+                </td>
+                <td width="60">
+                </td>
+            </tr>
+            <tr style="padding-left: 15px; padding-top: 10px; padding-right: 15px;">
+                <td nowrap="nowrap" valign="middle">
+                    <span style="font-size: 17px; font-weight: bold; color: black;">I would like to de-enroll
+                        from Easy Pay</span>
+                    <br>
+                </td>
+                <td style="text-align: center; vertical-align: middle;" nowrap="nowrap">
+                    <a href="javascript:void(0);" onclick="javascript:showHideDenrollPopUp(0);" border="0">
+                        <img src="paymentoptions.aspx_files/Close.gif" alt="close">
+                    </a>
+                </td>
+            </tr>
+            <tr style="background-color: white; padding-left: 15px; padding-right: 15px;">
+                <td colspan="2">
+                    <span style="font-size: 15px; font-weight: normal; color: black">Easy Pay is the easiest
+                        way to pay your bill.</span>
+                    <br style="padding-bottom: 3px;">
+                    <br style="padding-bottom: 3px;">
+                    <span style="font-size: 11px; font-weight: normal; color: black; padding-top: 10px;
+                        padding-bottom: 10px;">Reasons to stay enrolled:<br style="padding-bottom: 3px;">
+                    </span>• No more late fee<br style="padding-bottom: 3px;">
+                    • Easily choose how you'd like to manage your payments<br style="padding-bottom: 3px;">
+                    • Recieve an email notification when your payment is posted<br style="padding-bottom: 3px;">
+                    • View up to 24 month of billing history<br style="padding-bottom: 3px;">
+                </td>
+            </tr>
+            <tr style="background-color: white; padding-left: 15px; padding-right: 15px; padding-bottom: 10px;">
+                <td colspan="2" style="color: black;" align="left" valign="middle">
+                    <input id="chkDeenrollEP" name="chkDeenrollEP" type="radio">I want to de-enroll
+                    from Easy Pay
+                    <br>
+                    <input id="chkDeenrollEPPFB" name="chkDeenrollEP" type="radio">I want to de-enroll
+                    from Easy Pay and Paper Free Billing
+                </td>
+            </tr>
+            <tr style="background-color: white; padding-left: 15px; padding-right: 15px; padding-bottom: 10px;">
+                <td colspan="2">
+                    <div class="ep">
+                        <div style="margin-top: 0;" class="actions">
+                            <a id="btnPaymentConfirmation" onclick="javascript:showHideDenrollPopUp(0);DeEnroll();" class="button complete relies" href="#"><span class="red"><span><span>Continue</span>
+                                </span></span></a><a onclick="javascript:showHideDenrollPopUp(0);" id="btnPaymentDetails" class="button prev"><span class="red"><span><span>Cancel </span></span></span>
+                            </a>
+                        </div>
+                    </div>
+                </td>
+            </tr>
+        </tbody></table>
+    </div>
+    <div style="display: none; visibility: hidden; z-index: 1016; left: 90px; vertical-align: middle;
+        width: 657px; position: absolute; background-color: White; height: 270px; border: 2px solid gray;" id="blkEzAct" align="center">
+        <table border="0" cellpadding="0" cellspacing="0" height="270" width="657">
+            <tbody><tr>
+                <td width="82">
+                </td>
+                <td width="518">
+                </td>
+                <td width="50">
+                </td>
+            </tr>
+            <tr style="padding-left: 15px; padding-top: 10px; padding-right: 15px;">
+                <td colspan="3" nowrap="nowrap">
+                    <span style="font-size: 11px; font-weight: bold; color: black;">Thank you for your payment,
+                        and welcome to the Paper Free Billing Trial!</span><br style="padding-bottom: 4px;">
+                    <span style="font-size: 11px; font-weight: bold; color: #999999;">Your Paper Free Billing
+                        60-day trial will end and your Paper Free Billing will be active on
+                        10-31-2011.*</span>
+                </td>
+            </tr>
+            <tr style="background-color: rgb(238, 238, 238); padding-left: 15px; padding-right: 15px;">
+                <td>
+                    <img src="paymentoptions.aspx_files/PLBicon_82x120.png" height="100" width="82">
+                </td>
+                <td colspan="2" style="padding-left: 5px;">
+                    <span style="font-size: 11px; font-weight: normal; color: #999999;"><b>Paper free billing
+                        makes it easy to:</b><br style="padding-bottom: 3px;">
+                        • Simplify your life by minimizing paper clutter.<br style="padding-bottom: 3px;">
+                        • Conveniently manage your account online anytime.<br style="padding-bottom: 3px;">
+                        • Review up to 24 months of your statements online.<br style="padding-bottom: 3px;">
+                        • Choose to receive bill reminders via email or text message each month.<br style="padding-bottom: 3px;">
+                        • Be kind to the environment by going green.<br style="padding-bottom: 3px;">
+                    </span>
+                </td>
+            </tr>
+            <tr style="background-color: rgb(238, 238, 238); padding-left: 15px; padding-right: 15px; padding-bottom: 10px;">
+                <td colspan="2" valign="bottom">
+                    <span style="font-size: 12px; font-weight: bold; color: Black;">Want to skip the 60-day
+                        trial period, or don't want Paper Free Billing? Look under the
+                        <br style="padding-bottom: 3px;">
+                        Other Account Actions section and select the <b style="color: Red;">Paper Free Billing</b>
+                        link to make changes. </span>
+                    <br>
+                </td>
+                <td align="right" valign="bottom">
+                    <span style="font-size: 12px; font-weight: bold; color: #999999;"><a href="javascript:showHideEzActPopUp(0);">
+                        <img src="paymentoptions.aspx_files/closepopup.gif"></a></span>
+                </td>
+            </tr>
+        </tbody></table>
+    </div>
+    <div style="display: none; visibility: hidden; z-index: 1016; left: 90px; vertical-align: middle;
+        width: 500px; position: absolute; top: 130px; background-color: White" id="divAutopayCancelPopu" align="center">
+        <table border="0" cellpadding="0" cellspacing="0" height="248" width="755">
+            <tbody><tr style="padding-left: 15px; padding-right: 15px; background-color: White;">
+                <td align="left" valign="middle">
+                    <img src="paymentoptions.aspx_files/are_you_sure.gif">
+                </td>
+                <td align="right">
+                    <img src="paymentoptions.aspx_files/btn_closetext.gif" onclick="javascript:HideAPCacelPopup();" style="vertical-align: middle;">&nbsp;&nbsp;
+                    <img src="paymentoptions.aspx_files/btn_close.png" onclick="javascript:HideAPCacelPopup();" style="vertical-align: middle;">
+                </td>
+            </tr>
+            <tr style="padding-left: 15px; background-color: rgb(246, 246, 246); padding-top: 10px; padding-right: 10px;">
+                <td colspan="2">
+                    <span class="LightTxt18">The payment information you have just entered will not be saved.
+                        You will be taken<br>
+                        back to the main payments page. </span>
+                    <br>
+                </td>
+            </tr>
+            <tr style="padding-left: 15px; background-color: rgb(246, 246, 246); padding-right: 15px;">
+                <td colspan="2" align="right">
+                    <a href="#" style="" onclick="javascript:HideAPCacelPopup();">
+                        <img src="paymentoptions.aspx_files/btn_cancel.gif"></a>&nbsp;&nbsp;&nbsp;&nbsp; <a href="#" onclick="HideAPCacelPopup();getWebresp('OneTimePaymentPPB.aspx',true);" style="">
+                            <img src="paymentoptions.aspx_files/btn_accept_and_continue.gif"></a>
+                </td>
+            </tr>
+        </tbody></table>
+    </div>
+    <div style="display: none; visibility: hidden; z-index: 1015; left: 200px; vertical-align: middle;
+        width: 500px; position: absolute; top: 160px; background-color: White" id="Popup" align="center">
+        <table border="0" cellpadding="0" cellspacing="0" width="500">
+            <tbody><tr style="padding: 5px;">
+                <td align="right">
+                    <img src="paymentoptions.aspx_files/Popup_btn_close.gif" onclick="javascript:ClosePopUpWindow();" style="">
+                </td>
+            </tr>
+            <tr>
+                <td style="padding-right: 5px;" align="center">
+                    <img src="paymentoptions.aspx_files/img_vzcom.gif" style="border-color: Blue; border-style: double;" height="130" width="170">
+                    
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
+
+                    <img src="paymentoptions.aspx_files/img_vznet.gif" style="border-color: Blue; border-style: double;" height="130" width="170">
+                </td>
+            </tr>
+            <tr align="center" valign="top">
+                <td align="center" valign="top">
+                </td>
+            </tr>
+            <tr style="padding: 13px;">
+                <td style="font-size: 11px; color: rgb(0, 0, 0); font-family: Arial;" align="left" valign="top">
+                    <span style="font-weight: bold; font-size: 12px; font-family: Arial">You are currently
+                        signed in with your Verizon Online ID (Verizon.net
+                        <img src="paymentoptions.aspx_files/ico_help.gif" style="" onmouseover="javascript:showLecBilledtip('lblLecBilledTip1','You login to Verizon.net (Verizon Online) to view your email and/or manage your verizon Data Services');" onmouseout="javascript:hideLecBilledtip('lblLecBilledTip1');">
+                        )-</span> <span style="font-weight: bold; font-size: 12px; font-family: Arial; color: Red;">
+                            bonini57</span><br>
+                    <br>
+                    However, in order to view and pay your bill or to see your complete billing information
+                    <br>
+                    you have to sign into <a style="font-size: 11px; cursor: pointer; color: Blue; font-family: Arial; text-decoration: underline;" href="https://signin.verizon.com/sso/logout/logout.jsp?target=https://www22.verizon.com/ForYourHome/ebillpay/code/MyVerizon2/Code/PaymentOptions.aspx">
+                        www.verizon.com/billpay</a> with your Verizon Residential ID <span style="font-weight: bold;
+                            font-size: 11px; font-family: Arial Black;">(Verizon.com
+                            <img src="paymentoptions.aspx_files/ico_help.gif" style="" onmouseover="javascript:showLecBilledtip('lblLecBilledTip2','You login to Verizon.com (Verizon Residential) to view and pay your bill and to shop and order products and services');" onmouseout="javascript:hideLecBilledtip('lblLecBilledTip2');">).</span><br>
+                    <br>
+                    <span style="font-weight: bold; font-size: 12px; font-family: Arial Black; text-decoration: underline">
+                        Forgot Verizon.com credentials?</span>
+                    <br>
+                    If you cannot remember your Verizon Residential ID or need create one, <a style="font-size: 11px; cursor: pointer; color: Blue; font-family: Arial; text-decoration: underline;" href="https://signin.verizon.com/sso/logout/logout.jsp?target=https://www22.verizon.com/foryourhome/registration/forgotuid/ForgotCredentials.aspx">
+                        Click here.</a>
+                    <br>
+                    <br>
+                    If you have your Verizon Residential ID and do not remember your password, <a style="font-size: 11px; cursor: pointer; color: Blue; font-family: Arial; text-decoration: underline;" href="https://signin.verizon.com/sso/logout/logout.jsp?target=https://www22.verizon.com/foryourhome/registration/forgotuid/ForgotCredentials.aspx">
+                        Click here.</a><br>
+                    <br>
+                </td>
+            </tr>
+        </tbody></table>
+    </div>
+    <div style="display: none; visibility: hidden; z-index: 1015; left: 200px; vertical-align: middle;
+        position: absolute; background-color: White" id="CmgSoon" align="center">
+        <table border="0" cellpadding="0" cellspacing="0" height="338" width="785">
+            <tbody><tr style="padding: 20px 15px; background-color: White;">
+                <td align="left" valign="middle">
+                    <img src="paymentoptions.aspx_files/img_onetime.gif">
+                </td>
+                <td align="right">
+                    <img src="paymentoptions.aspx_files/btn_closetext.gif" onclick="javascript:HideEnrollPopup();" style="vertical-align: middle;">&nbsp;&nbsp;
+                    <img src="paymentoptions.aspx_files/btn_close.png" onclick="javascript:HideEnrollPopup();" style="vertical-align: middle;">
+                </td>
+            </tr>
+            <tr style="padding-left: 15px; background-color: rgb(246, 246, 246); padding-top: 20px; padding-right: 15px;">
+                <td colspan="2">
+                    <span class="LightTxt18">You will now be redirected to a one-time payment vendor site.
+                        <br>
+                        <br>
+                        Please note that one-time credit or debit card payments will be processed
+                        <br>
+                        by a vendor who will charge a $3.50 service fee per payment.<br>
+                    </span>
+                    <br>
+                    <br>
+                    <br>
+                    <span class="BoldTxt18">You also have the option to:</span>
+                </td>
+            </tr>
+            <tr style="padding-left: 0pt; background-color: rgb(246, 246, 246); padding-top: 20px; padding-right: 15px;">
+                <td colspan="2" valign="top">
+                    <ul>
+                        <a href="#" onclick="HideEnrollPopup();if(window.location.toString().toLowerCase().indexOf('paymentoptions.aspx') >= 0){getWebresp('AutoPay_LandingPPB.aspx',true);} else {window.location='paymentoptions.aspx?target=mgmtpmtaccts';}">
+                            <li class="BlueTxt18">Enroll in AutoPay </li>
+                        </a><a href="#" onclick="HideEnrollPopup();if(window.location.toString().toLowerCase().indexOf('paymentoptions.aspx') >= 0){getWebresp('MakeaPaymentPPB.aspx',true);} else {window.location='paymentoptions.aspx?target=pmtoptions';}">
+                            <li class="BlueTxt18">Pay with a checking or savings account on Verizon.com</li></a>
+                    </ul>
+                </td>
+            </tr>
+            <tr style="padding: 20px 15px 15px; background-color: rgb(246, 246, 246);">
+                <td colspan="2" align="right">
+                    <a href="#" style="" onclick="javascript:HideEnrollPopup();">
+                        <img src="paymentoptions.aspx_files/btn_cancel.gif"></a>&nbsp;&nbsp;&nbsp;&nbsp; <a href="#" onclick="Open1XCCBillMatrixWindow();" style="">
+                            <img src="paymentoptions.aspx_files/btn_accept_and_continue.gif"></a>
+                </td>
+            </tr>
+        </tbody></table>
+    </div>
+    <div style="display: none; z-index: 1020; left: 370px; top: 295px; position: absolute;
+        padding-top: 1px; padding-bottom: 1px; border-bottom: solid 1px #999999; border-top: solid 1px #999999;
+        border-left: solid 1px #999999; border-right: solid 1px #999999" id="lblLecBilledTip1">
+    </div>
+    <div style="display: none; z-index: 1020; left: 460px; top: 340px; position: absolute;
+        padding-top: 1px; padding-bottom: 1px; border-bottom: solid 1px #999999; border-top: solid 1px #999999;
+        border-left: solid 1px #999999; border-right: solid 1px #999999" id="lblLecBilledTip2">
+    </div>
+    <table align="center" border="0" cellpadding="0" cellspacing="0" width="100%">
+        <tbody><tr valign="top">
+            <td>
+                <form id="frmHeader">
+                <span id="spTabHeader">
+                    <span id="lblTabbedLinks">
+                            </span><table border="0" cellpadding="0" cellspacing="0" width="100%">
+                        <tbody><tr>
+                                <td width="100%">
+                                    <table border="0" cellpadding="0" cellspacing="0">
+                                        <tbody><tr>
+                                            <td style="width: 676px;" height="30" width="676">
+                                                <div class="CB">
+                                                    <!-- Start Parent Tabs -->
+                                                    <table id="tableTAB" border="0" cellpadding="0" cellspacing="0">
+                                                        <tbody><tr>
+                                                            <td class="AcGTabL" id="AcTab_L" style="height: 32px;">
+                                                            </td>
+                                                            <td class="AcGTabM" title="Account Overview" onclick="AcTabs('AcTab2');AcctNavig('AcctOverview');" onmouseover="AcctSubMenu('AcctOverview');" id="AcTab2" style="height: 32px;">
+                                                                <div class="topTabLnk">
+                                                                    <a href="http://www22.verizon.com/ForYourHome/MyAccount/Protected/Account/MyAccountOverview.aspx" id="AcTab2_link" style="font-size: 8pt; color: rgb(102, 102, 102);">Account
+                                                                        Overview</a></div>
+                                                            </td>
+                                                            <td class="AcTabSep" id="AcTabSep2" style="height: 32px;">
+                                                            </td>
+                                                            <td class="AcGTabM" title="Bill" onclick="AcTabs('AcTab3');AcctNavig('AcctMyBill');" onmouseover="AcctSubMenu('AcctMyBill');" id="AcTab3" style="height: 32px;">
+                                                                <div class="topTabLnk">
+                                                                    <a href="#" id="AcTab3_link" style="font-size: 8pt; color: rgb(102, 102, 102);">Bill</a>
+                                                                </div>
+                                                            </td>
+                                                            <td class="AcTabSep" id="AcTabSep3" style="height: 32px;">
+                                                            </td>
+                                                            <td class="AcRTabM" title="Payment" onmouseover="AcctSubMenu('AcctPayment');" id="AcTab4" style="height: 32px;">
+                                                                <div class="topTabLnk">
+                                                                    <a href="#" id="AcTab4_link" style="color: rgb(255, 255, 255); font-size: 8pt;">Payment</a>
+                                                                </div>
+                                                            </td>
+                                                            <td class="AcTabSep" id="AcTabSep4" style="height: 32px;">
+                                                            </td>
+                                                            <td class="AcGTabM" title="Account Profile" onclick="AcTabs('AcTab5');AcctNavig('AcctProfiles')" onmouseover="AcctSubMenu('AcctProfiles');" id="AcTab5" style="height: 32px;">
+                                                                <div class="topTabLnk">
+                                                                    <a href="http://www22.verizon.com/ForYourHome/MyAccount/Protected/Account/MyAccountProfile.aspx" id="AcTab5_link" style="font-size: 8pt; color: rgb(102, 102, 102);">Account
+                                                                        Profile</a>
+                                                                </div>
+                                                            </td>
+                                                            <td class="AcTabSep" id="Td1" style="height: 32px;">
+                                                            </td>
+                                                            <td class="AcGTabM" title="My Perks" onclick="AcTabs('AcTab6');AcctNavig('AcctMyPerks','http://perks.verizon.com');" onmouseover="AcctSubMenu('AcctMyPerks');" id="AcTab6" style="height: 32px;">
+                                                                <div class="topTabLnk">
+                                                                    <a href="#" id="AcTab6_link" style="font-size: 8pt; color: rgb(102, 102, 102);">My
+                                                                        Perks</a></div>
+                                                            </td>
+                                                            <td class="AcGTabR" id="AcTab_R" style="height: 32px;">
+                                                            </td>
+                                                        </tr>
+                                                    </tbody></table>
+                                                    <!-- End Parent Tabs -->
+                                                </div>
+                                            </td>
+                                            <td valign="top">
+                                            </td>
+                                        </tr>
+                                    </tbody></table>
+                                </td>
+                            </tr>
+                        
+                    </tbody></table>
+                </span>
+                </form>
+            </td>
+            <td>
+                <span id="spCopyRight" style="display: none; position: relative; z-index: 110;
+                    left: 40px; top: 0px;"><a id="a1" href="https://my.verizon.com/central/vzc.portal?_nfpb=true&amp;_pageLabel=vzcp_copyRights">
+                        <b class="CopyRightViolationLink">Copyright Violation Notification </b></a>
+                </span>
+            </td>
+        </tr>
+        <tr valign="top">
+            <td style="width: 710px;" valign="top" width="710">
+                <div class="ep" id="dvEPTabbedHeader">
+                    <div class="billNavContainer">
+                        <ul class="billNav" id="ulTPnEPSContainer">
+                            <li class="active" id="liOTP"><a rel="onetimepayment" href="#POTop" onclick="showHideOTPnEPSecs('EPS'); getWebRespFromPO('OneTimePaymentPPB.aspx','pmtoptions');">
+                                One Time Payment</a></li>
+                            <li>
+                                <img style="margin-right: 15px;" src="paymentoptions.aspx_files/sec_nav_sep.png" alt="|"></li>
+                            <li class="" id="liEPS"><a id="A2" rel="easypay" href="#POTop" onclick="showHideOTPnEPSecs('OTP');getWebRespFromPO('EasyPayOptions.aspx','verizonep');">
+                                Easy Pay</a></li>
+                        </ul>
+                        <div style="font-size: 14px; text-align: right; padding-top:7px;">
+                            <span id="lblViewingAcct" style="font-size: 14px; text-align: right;">
+                                Account Number: <span id="lblSinglePhone" style="font-size: 14px; text-align: right;">
+                                    <span id="lblCustomerBTNNo" style="font-size: 14px; text-align: right;">0118537455111</span></span>
+                                <!-- mp_trans_disable_end -->
+                            </span>
+                        </div>
+                        <div style="height: 0pt;" class="fixer" id="dvAccFixed">
+                        </div>
+                    </div>
+                    <!-- One Time Payment -->
+                    <div id="dvOnetimepayment">
+                        <div class="pad_left">
+                            <h1 style="color: #5D5D5D; font-size: 22px;" id="hOTPHeading" name="hOTPHeading">Make a One-Time Payment</h1>
+                        </div>
+                        <div style="height: 18px;" class="fixer">
+                        </div>
+                    </div>
+                    <div id="dvOverview" style="display: none;">
+                        <div class="pad_left">
+                            <h1 style="color: #5D5D5D; font-size: 22px;">
+                                Easy Pay</h1>
+                            <div style="height: 10px;" class="fixer">
+                            </div>
+                            <p class="large">
+                                When it comes to your Verizon bill, you can finally take a load off. Find the payment
+                                option<br>
+                                that perfectly suits you. Control when and how you pay. Easy.</p>
+                            <div style="height: 15px;" class="fixer">
+                            </div>
+                            <div style="width: 300px;" class="col3 border">
+                                <h2>
+                                    Key Benefits</h2>
+                                <ul class="bullet">
+                                    <li>No more late fees</li>
+                                    <li>Easily manage your payments</li>
+                                    <li>Get an email notification when you've paid</li>
+                                    <li>View up to 24 months of billing history</li>
+                                </ul>
+                            </div>
+                            <div style="width: 310px;" class="col3 last">
+                                <div class="pad_left">
+                                    <h2>
+                                        How it Works</h2>
+                                    <ul class="bullet">
+                                        <li>Select the best payment option for you</li>
+                                        <li>Get an email notification when your payment<br>
+                                            is due or posted</li>
+                                        <li>Review your statement online anytime</li>
+                                    </ul>
+                                </div>
+                            </div>
+                        </div>
+                        <div class="rule">
+                            <hr>
+                        </div>
+                        <div style="height: 15px;" class="fixer">
+                        </div>
+                        <h1 style="background-image: url(../Images/easypay/enroll_now.gif)" class="fancy">
+                            Enroll Now</h1>
+                        <div style="height: 20px;" class="fixer">
+                        </div>
+                    </div>
+                </div>
+                <span id="divPmtSec" class="mainContentCol" style="position: relative; z-index: 110; left: 0px; top: 0px; width: 710px;"><form name="frmOneTimeConfirmation" method="post" action="OneTimeConfirmationPPB.aspx?SRC=OTREVIEW" id="frmOneTimeConfirmation">
+<div>
+<input name="__VIEWSTATE" id="__VIEWSTATE" value="/wEPDwUJOTAzMTc2Njg2D2QWAmYPZBYCAgMPZBYUAgEPFgIeCWlubmVyaHRtbAUJNDc5MjUwNzEwZAIDDxYCHgdWaXNpYmxlZxYCAgEPFgIfAAUSYm9uaW5pNTdAZ21haWwuY29tZAIHDxYCHwAFCjA5LzAxLzIwMTFkAgkPFgIfAAUKMDkvMDEvMjAxMWQCCw9kFgRmDxYCHwAFCkFjY291bnQgIzpkAgEPZBYCAgEPFgIfAAUKODM1NTAxMTk2OWQCDQ8WAh8ABRNObyBQcm9maWxlIFNlbGVjdGVkZAIQDxYCHwFnFggCAQ8WAh8ABQ5KT0hOIFIgIEJPTklOSWQCAw8WAh8ABQRWSVNBZAIFDxYCHwAFEFhYWFhYWFhYWFhYWDUyNzdkAgcPZBYCAgEPFgIfAAUHMDYvMjAxMmQCEg9kFgICAQ8WAh8ABQU4Ny40OWQCGg8WAh8BZ2QCHA8WAh8BZ2Rk1hj4bA+1Jt48ab40etXe50810dk=" type="hidden">
+</div>
+
+<div>
+
+	<input name="__EVENTVALIDATION" id="__EVENTVALIDATION" value="/wEWAgLe1KmxDwLclvSICnkPcK/0JAG4Ii3z8gpgcaNIvgET" type="hidden">
+</div>
+<!------------------ START PAYMENT CONFIRMATION PAGE --------------------------------------------------------------------------------------------------->
+
+<div id="dvPaymentConfirmation" style="width: 710px;" class="ep">
+    <div class="pb">
+        <ul class="min">
+            <li><span><span>1. Payment Details</span></span></li>
+            <li class="before"><span><span>2. Review</span></span></li>
+            <li class="active last"><span><span class="last">3. Confirmation</span></span></li>
+        </ul>
+    </div>
+    <div style="height: 10px;" class="fixer">
+    </div>
+    <span id="lblPrinterFriendlyBlock">
+        <div class="pad_left">
+            <p style="margin-bottom: 0;">
+                Thank you for your payment! Your <span id="" style="font-weight: bold; color: #000000;">confirmation number is:</span>
+                <!-- mp_trans_disable_start -->
+                <span id="lblAcknowledgementNo" style="font-weight: bold; color: #000000;">479250710</span>
+                <!-- mp_trans_disable_end -->
+            </p>
+            <p id="lblEmailNotification" style="margin-bottom: 0;">
+                You will receive an email confirmation shortly at <span id="lblEmail">bonini57@gmail.com</span>
+            </p>
+            
+        </div>
+        <span id="lblPFHeader">
+            <div style="height: 0px;" class="fixer">
+            </div>
+            <div style="height: 10px;" class="fixer">
+            </div>
+            <div>
+                <table border="0" width="100%">
+                    <tbody><tr>
+                        <td style="padding-left: 10px;">                            
+                            <img src="paymentoptions.aspx_files/payment_confirmation.gif" alt="Payment Confirmation" border="0">
+                        </td>
+                        <td style="text-align: right;">                            
+                                <a href="javascript:doOneTimePrintFriendly();">
+                                    <img src="paymentoptions.aspx_files/print.gif" alt="Print" border="0"></a>
+                            
+                        </td>
+                    </tr>
+                </tbody></table>
+            </div>
+        </span>
+        <div style="height: 15px;" class="fixer">
+        </div>
+        <h4 class="gray">
+            Payment Information</h4>
+        <table class="rows" cellpadding="0" cellspacing="0">
+            <tbody>
+                <tr>
+                    <td class="nopl" style="padding-left: 10px;">
+                        Today's Date
+                    </td>
+                    <td class="value">
+                        <span id="lblTodaysDate">09/01/2011</span>
+                    </td>
+                </tr>
+                <tr>
+                    <td class="nopl" style="padding-left: 10px;">
+                        Payment Date
+                    </td>
+                    <td class="value payment-date">
+                        <!-- mp_trans_disable_start -->
+                        <span id="lblPaymentDate">09/01/2011</span>
+                        <!-- mp_trans_disable_end-->
+                    </td>
+                </tr>
+                <tr id="trAccountNumber">
+	<td id="lblPhoneLabel" class="nopl" style="padding-left: 10px;">Account #:</td>
+	<td class="value">
+                        <span id="lblPhoneNo">8355011969</span>
+                    </td>
+</tr>
+
+                <tr class="last">
+                    <td class="nopl" style="padding-left: 10px;">
+                        Profile Name
+                    </td>
+                    <td class="value">
+                        <!-- mp_trans_disable_start -->
+                        <span id="lblProfile">No Profile Selected</span>
+                        <!-- mp_trans_disable_end-->
+                    </td>
+                </tr>
+            </tbody>
+        </table>
+        <h4 class="gray">
+            Transaction Information</h4>
+        <span id="lblCCTransactionInfo">
+            <span id="lblBlockExpirationDate">
+                        </span><table class="rows card" cellpadding="0" cellspacing="0">
+                <tbody>
+                    <tr>
+                        <td class="nopl" style="padding-left: 10px;">
+                            Cardholder's Name
+                        </td>
+                        <td class="value">
+                            <span id="lblCardHolderName">JOHN R  BONINI</span>
+                        </td>
+                    </tr>
+                    <tr>
+                        <td class="nopl" style="padding-left: 10px;">
+                            Card Type
+                        </td>
+                        <td class="value">
+                            <span id="lblCardType">VISA</span>
+                        </td>
+                    </tr>
+                    <tr>
+                        <td class="nopl" style="padding-left: 10px;">
+                            Card Number
+                        </td>
+                        <td class="value">
+                            <span id="lblCardNumber">XXXXXXXXXXXX5277</span>
+                        </td>
+                    </tr>
+                    <tr>
+                            <td class="nopl" style="padding-left: 10px;">
+                                Expiration Date
+                            </td>
+                            <td class="value">
+                                <span id="lblExpirationdate">06/2012</span>
+                            </td>
+                        </tr>
+                    
+                </tbody>
+            </table>
+        </span>
+        <div id="divAmountPaid" style="border-bottom: 1px solid #DCDCDC;">
+            <table class="rows" cellpadding="0" cellspacing="0">
+                <tbody>
+                    <tr class="last">
+                        <td class="nopl" style="padding-left: 10px;">
+                            Amount Paid
+                        </td>
+                        <td class="value payment-amt">
+                            $<span id="lblPaymentAmount">87.49</span>
+                        </td>
+                    </tr>
+                </tbody>
+            </table>
+        
+        </div>
+        
+       
+    </span>
+    
+        <div id="dvPaymentUpdateMessage" style="padding-left:10px; padding-bottom: 5px; padding-top:5px;">
+        <span style="font-size: 12px; color: #000000;">Please allow  30 
+minutes for your payment to be noted on your Verizon account.&nbsp; 
+        Notification will update your account and, if applicable, 
+restore service, or stop interruption of service once the full notice 
+amount is paid.&nbsp; 
+        There is no need to contact Verizon.
+            </span></div>
+    
+    
+    
+
+    <div id="lblEasyPayTout" style="padding-top:20px;border-bottom: 1px solid #DCDCDC;border-top: 1px solid #DCDCDC; margin: 0 0px;padding:  5px 0 100px 10px;">
+        <div style="width: 700px;" class="column last">
+            <img src="paymentoptions.aspx_files/verizon_easy_pay.gif" alt="Verizon Easy Pay" border="0">           
+            <p class="f12">
+                When it comes to your Verizon bill, you can finally take a load off. Find the payment
+                option that<br>
+                perfectly suits you. Control when and how you pay. Easy.</p>           
+            <div class="fr">
+                <a href="javascript:showHideOTPnEPSecs('FOTP');getWebRespFromPO('EasyPayOptions.aspx','verizonep');" class="button" rel="easypay"><span class="red"><span><span>
+                    Enroll Now</span></span></span></a></div>
+        </div>
+      
+    </div>
+    <div id="divMobileBanner">
+        <table border="0" cellpadding="0" cellspacing="0" height="110" width="710px;">
+            <tbody><tr>
+                <td>
+                    <a href="javascript:window.open('https://market.android.com/details?id=com.verizon.myverizon.activity&amp;feature=search_result');BillpayTracking('https://market.android.com/details?id=com.verizon.myverizon.activity&amp;feature=search_result','PaymentAcknowledgement','OTP');">
+                        <img src="paymentoptions.aspx_files/androidapp_banner_black.gif" width="710px"></a>
+                </td>
+            </tr>
+        </tbody></table>
+    </div>
+</div>
+<!------------------ END PAYMENT CONFIRMATION PAGE   ---------------------------------------------------------------------------------------------------->
+<input name="txtEzActiPopup" id="txtEzActiPopup" type="hidden">
+</form>
+</span>
+                <div style="padding-top: 0px; width: 710px;">
+                    <div style="z-index: 1002; position: absolute; width: 400px; vertical-align: middle; top: 361px; left: 563px; display: none;" id="wPopup" align="center">
+                        <table>
+                            <tbody><tr>
+                                <td width="28">
+                                    <img src="paymentoptions.aspx_files/loading.gif">
+                                </td>
+                            </tr>
+                        </tbody></table>
+                    </div>
+                    <div id="wfade" style="position: absolute; display: none; height: 300px; width: 0px; left: 463px; top: 283px;" class="white_overlay">
+                    </div>
+                </div>
+                
+            </td>
+            <td style="height: 400px;" valign="top" width="350">
+                <span id="spRightNav" style="position: relative; z-index: 110; left: 10px;
+                    top: 0px;">
+                    <!--Right Nav -->
+                    <table border="0" cellpadding="1" cellspacing="1" width="265">
+                        <tbody><tr>
+                            <td style="padding-left: 20px;" valign="top" width="250">
+                                <!-- start right nav -->
+                                <div class="ep">
+                                    <div style="height: 5px;" class="fixer">
+                                    </div>
+                                    <div class="linksTout">
+                                        <h3>
+                                            Payment Actions</h3>
+                                        <ul>
+                                            <span id="lblPaymentOptions">
+                                                <li><a id="aMakePayments" href="#POTop" onclick="showHideOTPnEPSecs('EPS');getWebRespFromPO('OneTimePaymentPPB.aspx','pmtoptions');">
+                                                    One Time Payment</a></li>
+                                            </span><span id="lblVerizonEasyPay">
+                                                <li><a id="a3" href="#POTop" onclick="showHideOTPnEPSecs('OTP');getWebRespFromPO('EasyPayOptions.aspx','verizonep');">
+                                                    Easy Pay</a></li>
+                                            </span><span id="lblPayArrangements">
+                                                <li><a id="aPayArrangements" href="#POTop" onclick="showHideOTPnEPSecs('');getWebRespFromPO('PAProcessingPPB.aspx','pmtarrgmt');">
+                                                    Payment Arrangements</a> </li>
+                                            </span><span id="lblPaymentAccounts">
+                                                <li><a id="aPaymentAccountslink" href="#POTop" onclick="showHideOTPnEPSecs('BOTH');getWebRespFromPO('EasyPayConfirmation.aspx','qpedeenroll_ma');">
+                                                    Payment Accounts</a></li>
+                                            </span><span id="lblPaymentHistory">
+                                                <li><a id="aPaymentHistoryLink" href="#POTop" onclick="showHideOTPnEPSecs('');getWebRespFromPO('PaymentHistoryPPB.aspx','pmthist');">
+                                                    Payment/Adjustments History</a></li>
+                                            </span><span id="lblRefundStatus">
+                                                <li><a id="aRefundStatus" href="#POTop" onclick="showHideOTPnEPSecs('');getWebRespFromPO('RefundsPPB.aspx','refhist');">
+                                                    View Refund Status</a></li>
+                                            </span><span id="lblPaymentReminder">
+                                                <li>
+                                                    
+                                                    <a id="aSetupPaymentReminder" href="https://www22.verizon.com/ForYourHome/MyAccount/Protected/Account/MyAccountProfile.aspx">
+                                                        Setup Payment Reminder</a>
+                                                    
+                                                </li>
+                                            </span><span id="lblPaymentLocations">
+                                                <li><a href="https://www22.verizon.com/content/paymentlocations/" id="lnkPaymentLocations" class="normalLink">
+                                                    Payment Locations</a></li>
+                                            </span>
+                                        </ul>
+                                    </div>
+                                    <div class="linksTout">
+                                        <h3>
+                                            Other Account Actions</h3>
+                                        <ul>
+                                            <span id="lblViewBillConsumer">
+                                                <li><a href="https://www22.verizon.com/foryourhome/billview/MyBill.aspx?BP=BillProfile&amp;ref=BV&amp;pagearea=PB&amp;REQSRC=PROMOTION" id="lnkViewBillCB">View and Print My Bill</a> </li>
+                                            </span><span id="lblChangeBA">
+                                                <li><a href="https://www22.verizon.com/ForYourHome/Goflow/CBA/ChangeBillingAddress.aspx?Client=Billpay" id="lnkChangeBA">
+                                                    Change Billing Address</a> </li>
+                                            </span>
+                                            <span id="lblEnrollOneBill">
+                                                <li><a href="javascript:onebill=window.open('/ForYourHome/OneBill/main/OBMain.aspx?appid=BP&amp;ShowHeader=N',%20'onebillwin',%20'toolbar=no,status=no,menubar=no,resizable=no,scrollbars=yes,width=785,height=245');onebill.focus();" id="lnkEnrollOneBill" title="ONE-BILL">ONE-BILL<sup>®</sup></a> </li>
+                                            </span>
+                                            <span id="lblPFB">
+                                                <li><a href="https://www22.verizon.com/foryourhome/billview/PfbPage.aspx?ref=BILLPAY" id="lnkPFB">
+                                                    Paper Free Billing</a></li>
+                                            </span>
+                                        </ul>
+                                    </div>
+                                    <div class="linksTout">
+                                        <h3>
+                                            Questions about your bill?</h3>
+                                        <ul>
+                                            <li><a href="https://www22.verizon.com/Content/BillingCenter/" target="_blank">Understand Your Paper Bill</a></li>
+                                            <li><a href="https://www22.verizon.com/ResidentialHelp/Phone/Billing/Manage+Your+Bill/General/128739.htm" target="_blank">Billing FAQ's</a></li>
+                                        </ul>
+                                    </div>
+                                    <div class="boxTout" id="askVerizonTout">
+                                        <div class="desc">
+                                            <strong style="font-size: 11px">Get instant answers from<br>
+                                                our automated customer<br>
+                                                service agent.</strong>
+                                            <div>
+                                                <a href="javascript:%20doOnChatLinkClick();" class="button"><span class="gray"><span><span>
+                                                    Ask Verizon</span></span></span></a>
+                                            </div>
+                                            <div class="fixer">
+                                                &nbsp;</div>
+                                        </div>
+                                    </div>
+                                    <div id="divLoad"></div>
+                                </div>
+                                <!-- end right nav -->
+                            </td>
+                        </tr>
+                    </tbody></table>
+                    <!--End Right Nav-->
+                </span>
+                
+            </td>
+        </tr>
+        <tr>
+            <td>
+                <div id="dvBannerRight" style="display: none;">
+                    <!-- OAS AD -->
+
+                    <script language="javascript">
+        try
+        {
+            OAS_AD('Top');
+            }
+            catch(ex)
+            {
+            }
+                    </script>
+
+                    <!-- OAS AD -->
+                </div>
+            </td>
+        </tr>
+    </tbody></table>
+
+    <script language="javascript">
+getWebresp('OneTimePaymentPPB.aspx', true, '');
+    </script>
+
+    <div id="dvFooterHTML"><!-- Vignette V6 Thu Sep 01 04:19:14 2011 -->
+
+<!-- ************ Begin : Single Code Base Footer ************ -->
+
+		</div></div> 
+	</div>
+</div>
+<script type="text/javascript">bLog20=true;</script>
+<script type="text/javascript">
+
+/* OnlineOpinion (S3tS,1424b) */
+/* This product and other products of OpinionLab, Inc. are protected by U.S. Patent No. 6606581, 6421724, 6785717 B1 and other patents pending. */
+var custom_var,_sp='%3A\\/\\/',_rp='%3A//',_poE=0.0, _poX=0.0,_sH=screen.height,_d=document,_w=window,_ht=escape(_w.location.href),_hr=_d.referrer,_tm=(new Date()).getTime(),_kp=0,_sW=screen.width;_d.onkeypress=_fK;function _fK(_e){if(!_e)_e=_w.event;var _k=(typeof _e.which=='number')?_e.which:_e.keyCode;if((_kp==15&&_k==12))_w.open('https://dashboard.opinionlab.com/pv_controlboard.html?url='+_fC(_ht),'PageViewer','height=529,width=705,screenX='+((_sW-705)/2)+',screenY='+((_sH-529)/2)+',top='+((_sH-529)/2)+',left='+((_sW-705)/2)+',status=yes,toolbar=no,menubar=no,location=no,resizable=yes');_kp=_k};function _fC(_u){_aT=_sp+',\\/,\\.,-,_,'+_rp+',%2F,%2E,%2D,%5F';_aA=_aT.split(',');for(i=0;i<5;i++){eval('_u=_u.replace(/'+_aA[i]+'/g,_aA[i+5])')}return _u};function O_LC(){setOpVar();_w.open('https://secure.opinionlab.com/ccc01/comment_card.asp?time1='+_tm+'&time2='+(new Date()).getTime()+'&prev='+_fC(escape(_hr))+'&referer='+_fC(_ht)+'&height='+_sH+'&width='+_sW+'&custom_var='+custom_var,'comments','width=535,height=192,screenX='+((_sW-535)/2)+',screenY='+((_sH-192)/2)+',top='+((_sH-192)/2)+',left='+((_sW-535)/2)+',resizable=yes,copyhistory=yes,scrollbars=no')};function _fPe(){if(Math.random()>=1.0-_poE){O_LC();_poX=0.0}};function _fPx(){if(Math.random()>=1.0-_poX)O_LC()};window.onunload=_fPx;function O_GoT(_p){_d.write('<a href=\'javascript:O_LC()\' class=\'footerText\'>'+_p+'<\/a>');_fPe()}function setOpVar(){try{custom_var=(getCookie('RegistrationApp')!=null?getCookie('RegistrationApp').split('=')[1]:"")+"~"+(getCookie('PDSS')!=null?getCookie('PDSS').split('=')[1]:"")+"~"+(getCookie('DSS')!=null?getCookie('DSS').split('=')[1]:"");}catch(e){}}
+//scbHideOverlay();setOpVar()
+</script>
+<style type="text/css">
+body{margin:0;padding:0;}
+#ghffootercont{width:100%;min-width:995px;text-align:center;font-family:Arial,Helvetica,sans-serif;z-index:800;clear:both;}
+#ghfredbar{min-width:995px;background:#eb0000 url(https://www22.verizon.com/images/headerfooter/scbhoriztile.gif) repeat-x 0 -195px;height:5px;margin:17px 0;overflow:hidden;}
+#ghfgreybar{background:#aaa;height:1px;margin:17px 0;overflow:hidden;}
+#ghffooter{position:relative;text-align:left;margin-left:auto;margin-right:auto;background:#fff;background:transparent;}
+#gfnav *{color:#000;font-size:11px;font-weight:normal;}
+#gfnav span{margin:0 3px;color:#666;}
+#gfnav a:link,
+#gfnav a:hover,
+#gfnav a:active{color:#06c;}
+#gfnav a:visited{color:#636;}
+#gfnav a:link,
+#gfnav a:visited{text-decoration:none;}
+#gfnav a:hover,
+#gfnav a:active{text-decoration:underline;}
+#gfnav{width:762px;margin-top:0;font-size:11px;height:45px;}
+#scbflinks{width:995px;margin-bottom:10px;line-height:15px;}
+.scbfnav a:link,
+.scbfnav a:visited{text-decoration:none;}
+.scbfnav a:active,
+.scbfnav a:hover{text-decoration:underline;}
+#SCB10f *,
+#SCB20f *{letter-spacing:normal;}
+.ghfpics{display:block;background-image:url(https://www22.verizon.com/images/headerfooter/ghfimages.gif);background-repeat:no-repeat;overflow:hidden;}
+.gftruste{width:116px;height:32px;line-height:32px;background-position:0 -120px;float:left;margin-right:10px;}
+.gfbbb{width:90px;height:34px;line-height:34px;background-position:0 -160px;float:left;}
+#scbfooter{font-size:11px;}
+#scbfooter a:link,
+#scbfooter a:visited,
+#scbfooter a:active{font-family:Arial,Helvetica,sans-serif;font-size:11px;text-decoration:none;}
+#scbfooter a:hover{font-family:Arial,Helvetica,sans-serif;font-size:11px;text-decoration:underline;}
+#scbfooter span{margin:0 5px;}
+</style>
+
+<div id="ghffootercont">
+
+	
+		<script type="text/javascript">
+		if(typeof(bLog20)!='undefined'&&bLog20){document.write('<div id="ghfredbar"><img src="https://www22.verizon.com/images/spacer.gif" width="995" height="5" alt="" /><\/div>');}
+		else{document.write('<div id="ghfgreybar"><img src="https://www22.verizon.com/images/spacer.gif" width="995" height="1" alt="" /><\/div>');}
+		</script><div id="ghfredbar"><img src="paymentoptions.aspx_files/spacer.gif" alt="" height="5" width="995"></div>
+	
+	<div id="ghffooter" style="width:995px;">
+		<script type="text/javascript">
+			if(typeof(b100p)!='undefined'&&b100p)document.getElementById('ghffooter').style.width='99%';</script>
+		<!--googleoff: all-->
+		<noindex>
+		<div id="gfnav" class="scbfnav" style="width:995px;">
+
+
+<div id="SCB20f" style="display:block;">
+	<script type="text/javascript">if(typeof(bLog20)!='undefined'&&bLog20){if(typeof(dispLayer)!='undefined'){dispLayer('SCB20f','block');}}</script>
+	<div id="scbflinks" style="">
+		<a href="http://www22.verizon.com/about/">About Us</a> <span>|</span>
+			<a href="https://www22.verizon.com/Residential/Templates/sas/sas_StoreLocator.aspx">Store Locator</a> <span>|</span>
+			<a href="http://www22.verizon.com/residentialhelp/">Support</a> <span>|</span>
+			<a href="http://www22.verizon.com/sitemap/">Site Map</a> <span>|</span>
+		
+		<!-- mp_trans_remove_start -->
+			
+
+		<script type="text/javascript">
+			if(typeof(bLog20)!='undefined'&&!bLog20){document.write('<a href="javascript:O_LC();" class="noexit">Site Feedback<\/a> <span>|<\/span>');}
+		</script>
+
+			
+		<!-- mp_trans_remove_end -->
+		
+				<a href="http://www22.verizon.com/jobs/" target="_blank">Careers</a> <span>|</span>
+				<a href="http://www.thinkfinity.org/" target="_blank">Verizon Thinkfinity</a>
+			<br>
+			<a href="http://www22.verizon.com/content/contactus/">Contact Us</a> <span>|</span>
+			<!-- mp_trans_remove_start -->
+			<a href="http://searchresults.verizon.com/ads/about.php">About Our Ads</a> <span>|</span>
+			<!-- mp_trans_remove_end -->
+		
+		<a href="http://www22.verizon.com/privacy/">Privacy Policy</a> <span>|</span>
+		<a href="http://www22.verizon.com/terms/">Terms and Conditions</a><br>
+		<br>
+		Use of Verizon websites is subject to user compliance with our <a href="http://www22.verizon.com/terms/#WebSiteTerms">Website Terms of Use</a>
+		<br>
+		© 2011 Verizon All Rights Reserved
+		
+	</div>
+	
+		<div style="position:absolute;top:0;right:0;height:34px;">
+			<!-- mp_trans_remove_start -->
+			<a href="http://www.truste.org/ivalidate.php?url=www.verizon.com&amp;sealid=101" target="_blank" name="&amp;lid=TRUSTeFooter">
+				<img src="paymentoptions.aspx_files/spacer.gif" alt="TRUSTe Certified Privacy" title="TRUSTe Certified Privacy" class="ghfpics gftruste" border="0" height="1" width="1"></a>
+			<!-- mp_trans_remove_end -->
+			<a href="http://www.bbbonline.org/cks.asp?id=108072593112" target="_blank" name="&amp;lid=BBBFooter">
+				<img src="paymentoptions.aspx_files/spacer.gif" alt="Better Business Bureau: Accredited Business" title="Better Business Bureau: Accredited Business" class="ghfpics gfbbb" border="0" height="1" width="1"></a>
+		</div>
+		
+</div><!-- Vignette V6 Thu Sep 01 04:19:14 2011 -->
+
+<!--Omniture Code HBX2.5 (Universal)-->
+<!--Copyright 1997 - 2008. Omniture, Inc. All Rights Reserved. U.S.PATENT No. 6,393,479B1. More Info: http://www.omniture.com/ -->
+<script type="text/javascript">var ghfT='myvz20';</script>
+<script type="text/javascript" src="paymentoptions.aspx_files/a.txt"></script>
+<script type="text/javascript" src="paymentoptions.aspx_files/a_002.txt"></script>
+<!--End Omniture Code-->
+
+
+			<script type="text/javascript">var vzLogging_appName="HomePage";</script>
+			<!-- mp_trans_disable_start -->
+			<script type="text/javascript">
+			if(typeof(scbUseLocalPTCopy)!='undefined'&&scbUseLocalPTCopy==''){
+				if(window.location.hostname=='www22.verizon.com'||window.location.hostname=='espanol.verizon.com'||window.location.hostname=='www.ncnetwork.net'||window.location.hostname=='onlinehelp.ncnetwork.net'){
+					document.write('<scr'+'ipt type="text/javascript" src="https://www22.verizon.com/includes/javascript/pagetracker.js"><\/scr'+'ipt>');
+				}
+			}
+			</script><script type="text/javascript" src="paymentoptions.aspx_files/pagetracker.js"></script>
+			<!-- mp_trans_disable_end -->
+
+		</div>
+		</noindex>
+		<!--googleon: all-->
+	</div>
+</div>
+
+<style type="text/css">
+/* OnlineOpinion v4.1.7 */
+/* This product and other products of OpinionLab, Inc. are protected by U.S. Patent No. 6606581, 6421724, 6785717 B1 and other patents pending. */
+@media screen{
+	/* [+] Floating Icon Elements */
+	/* NOTE:To disable [+] Floating Icon rollover state in modern, non-IE browsers, comment out ".oo_feedback_float:hover .olUp" and ".oo_feedback_float:hover .olOver". For IE see the configuration file. */
+	#oo_feedback_float{}
+	.oo_feedback_float{visibility:hidden;height:52px;width:102px;margin:0 20px 50px 0;padding:0;font:12px Arial, Helvetica, sans-serif;text-align:center;color:#000;cursor:pointer;z-index:1001;}
+	* html .oo_feedback_float{height:102px;width:122px;bottom:50px;}
+	.oo_feedback_float .olUp{text-align:center;width:100px;padding:5px 0px;position:relative;}
+	.oo_feedback_float .olUp *{z-index:1002;position:relative;}
+	.oo_feedback_float .olUp .oo_transparent{display:block;background:white;position:absolute;top:0;left:0;-ms-filter:"progid:DXImageTransform.Microsoft.Alpha(Opacity=50)";filter:alpha(opacity=50);opacity:.5;height:50px;width:100px;z-index:1001;-moz-border-radius:5px;-webkit-border-radius:5px;}
+	.oo_feedback_float:hover .olUp{display:none;}
+	.oo_feedback_float .fbText{display:block;padding:3px;}
+	.oo_feedback_float .olOver{display:none;border:1px solid #CCC;padding:10px 0;background:#FFF;text-align:center;width:100px;-moz-border-radius:5px;-webkit-border-radius:5px;}
+	.oo_feedback_float:hover .olOver{display:block;}
+	/* Static Icon Elements */
+	#oo_feedback_static{cursor:pointer;}
+	/* On Page Card Elements */
+	#onlineopinion_cc_overlay{display:none;position:fixed;top:0;left:0;height:1000%;width:100%;margin:0;padding:0;background-color:#000;background-position:50% 80px;background-repeat:no-repeat;opacity:.3;filter:alpha(opacity=30);z-index:1004;}
+	.onlineopinion_cc_div{display:none;position:fixed;top:25px;left:0;padding:0;background:transparent !important;font:12px Arial, Helvetica, sans-serif;z-index:1005;}
+	a.onlineopinion_cc_closelink{display:block;position:absolute;top:-10px;right:-5px;height:24px;width:24px;background:url(oo_close.png) no-repeat;text-decoration:none;z-index:1006;}
+	.onlineopinion_cc_frame{position:relative;width:535px;border:none;background-color:#FFF;opacity:1.0;filter:alpha(opacity:100);-moz-box-shadow:rgba(0, 0, 0, .6) 0 0 15px;-webkit-box-shadow:rgba(0, 0, 0, .6) 0 0 15px;z-index:1005;}
+	.onlineopinion_cc_shadow{position:absolute;top:0;left:-27px;height:100%;width:589px;background:url(oo_shadow.png) repeat-y;z-index:1001;}
+	.onlineopinion_cc_shadow_top{position:absolute;top:-11px;left:-27px;height:11px;width:589px;background:url(oo_shadow_top.png);z-index:1001;}
+	.onlineopinion_cc_shadow_bottom{position:absolute;bottom:-11px;left:-27px;height:11px;width:589px;background:url(oo_shadow_bottom.png) repeat-y;z-index:1001;}
+}
+@media print{
+	.oo_feedback_float, .olUp, .olOver{display:none;}
+}
+/* OnlineOpinion v4.1.7, Copyright 2010 Opinionlab, Inc. */
+</style>
+
+<script type="text/javascript">
+	if(typeof(bLog20)!='undefined'&&bLog20){document.write('<scr'+'ipt language="javascript" type="text/javascript" charset="windows-1252" src="https://www22.verizon.com/includes/javascript/oo_engine_c.js"><\/scr'+'ipt>');}
+</script><script language="javascript" type="text/javascript" charset="windows-1252" src="paymentoptions.aspx_files/oo_engine_c.html"></script>
+
+<script type="text/javascript">
+	var strThisHref=(window.location.href).toLowerCase().substring(0,((window.location.href).toLowerCase().search(/goto=/)>-1)?(window.location.href).toLowerCase().search(/goto=/):999);
+	var scbArSTO=new Array('www22.verizon.com/foryourhome','perks.verizon.com','surround.verizon.com','media.verizon.com/media','my.verizon.com','signin.verizon.com','essentialsandextras.verizon.com');
+	var scbSTO=false;for(var i=0;i<scbArSTO.length;i++){if(strThisHref.indexOf(scbArSTO[i])>-1){scbSTO=true;break;}}
+	if(typeof(bLog20)!='undefined'&&bLog20&&typeof(bVOLRM)!='undefined'&&bVOLRM==''&&scbSTO){document.write('<scr'+'ipt type="text/javascript" src="https://signin.verizon.com/sso/resources/js/sessionAlert.js"><\/scr'+'ipt>');}
+</script><script type="text/javascript" src="paymentoptions.aspx_files/sessionAlert.js"></script>
+
+<!-- ************ End : Single Code Base Footer ************ -->
+</div>
+    <div align="center">
+        <span id="lblMachineName" style="font-size: 10px; color: white">BH........08V</span>
+    </div>
+    <iframe id="frameBillMatrixLogging" name="frameBillMatrixLogging" frameborder="0" height="1" width="0"></iframe>
+    <input name="hdQPESTATUS" id="hdQPESTATUS" type="hidden">
+    <input name="hdProfileType" id="hdProfileType" type="hidden">
+    <input name="hdCardType" id="hdCardType" type="hidden">
+    <input name="hdCardNumber" id="hdCardNumber" type="hidden">
+    <input name="hdProfileID" id="hdProfileID" type="hidden">
+    <input name="hdDenroll" id="hdDenroll" type="hidden">
+
+
+&lt;</span><script src="paymentoptions.aspx_files/scripthandler.txt" defer="defer" id="scrMain" type="text/javascript"></script><div style="position: fixed; right: 0px; bottom: 0px; visibility: visible;" title="Suggestions" class="oo_feedback_float" id="oo_feedback_float"><div tabindex="0" class="olUp"><img src="paymentoptions.aspx_files/oo_black.gif"><span class="fbText">Suggestions</span><div class="oo_transparent"></div></div><div class="olOver">Click here to<br>rate this page</div></div><iframe style="visibility: hidden;" src="paymentoptions.aspx_files/keepSessionAlive.html" id="ifrm" height="0" width="0"></iframe></body></html>

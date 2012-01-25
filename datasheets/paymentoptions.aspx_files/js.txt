@@ -1,0 +1,76 @@
+//Copyright (c) 2000-2003 by 24/7 Real Media, Inc. ALL RIGHTS RESERVED. 3/13/2008
+//New changes made on 06/25 and pushed to fuat on 06/25 
+//configuration
+OAS_url = 'https://oasc05.247realmedia.com/RealMedia/ads/';
+OAS_sitepage = 'my.verizon.com/billview/printpage';
+OAS_listpos = 'Top';
+OAS_query = 'search=';
+OAS_target = '_blank';
+OAS_RegLocurl = 'https://syndicate.verizon.net/ads/regionlocator.ashx';
+OAS_SynHandlerurl = 'https://syndicate.verizon.net/ads/scripthandler.ashx?source=';
+//end of configuration Version 6.0
+
+OAS_version = 11;
+OAS_rn = new String (Math.random());    // random number - cache buster
+OAS_rns = '1' + OAS_rn.substring (3, 11);     // random number - cache buster
+
+document.write( '<scr' + 'ipt language="JavaScript1.1" src="' + OAS_url + 'adstream_mjx.ads/' + OAS_sitepage + '/' + OAS_rns + '@' + OAS_listpos + '?' + OAS_query + '"><\/script>' );
+
+try
+{
+    if( document.images )
+    {
+        if( !document.images[ 'regionLocator' ] ) 
+        {
+            document.images[ 'regionLocator' ] = new Image();
+        }    
+    
+        document.images[ 'regionLocator' ].src = OAS_RegLocurl;
+        document.images[ 'regionLocator' ].height = 1;      
+        document.images[ 'regionLocator' ].width = 1;    
+
+    }
+		function DomReady(fn)
+		{//W3C
+			if(document.addEventListener)
+			{
+				document.addEventListener('DOMContentLoaded', fn, false);
+			}
+			//IE
+			else
+			{
+				document.onreadystatechange = function(){readyState(fn)}
+			}
+		}
+		function readyState(fn)
+		{
+			//dom is ready for interaction
+			if(document.readyState == 'complete')
+			{
+				fn();
+			}
+		}
+
+        function fnMainCall()
+        {  
+                       var _script = document.createElement('script');
+                       _script.type = 'text/javascript';
+                       _script.id='scrMain';
+                       _script.setAttribute( 'defer', 'defer' );                   
+                       _script.src = OAS_SynHandlerurl + OAS_sitepage ;                       
+                       document.body.appendChild(_script);                                         
+        }  
+        window.onDomReady = DomReady;
+		window.onDomReady(fnMainCall);
+            
+}
+catch(err)
+{
+    //To Do
+}
+
+function OAS_AD( pos ) {
+    if( self.OAS_RICH ) {
+		OAS_RICH( pos );
+	}		
+}
