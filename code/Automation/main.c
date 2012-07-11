@@ -8,7 +8,7 @@ int main(void) {
         PORTB &= ~(255); /* LED on */
         _delay_ms(200);
         PORTB |= 255; /* LED off */
-        _delay_ms(100);
+        _delay_ms(200);
     }
     return 0;
 }
