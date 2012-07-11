@@ -6,9 +6,9 @@ int main(void) {
     DDRB |= 255; /* set PB0 to output */
     while(1) {
         PORTB &= ~(255); /* LED on */
-        _delay_ms(90);
+        _delay_ms(100);
         PORTB |= 255; /* LED off */
-        _delay_ms(90);
+        _delay_ms(100);
     }
     return 0;
 }
